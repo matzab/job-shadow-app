@@ -24,6 +24,8 @@
     <string name="role_text">I am a…</string>
     <string name="check_student">Student</string>
     <string name="check_business">Business</string>
+    <string name="preference_text">Please add up to 3 preferences below</string>
+
 
 
 </resources>
