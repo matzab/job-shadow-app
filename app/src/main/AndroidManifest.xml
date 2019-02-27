@@ -13,9 +13,27 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".activities.RegisterActivity"></activity>
+        <activity android:name=".activities.MyApplicationsActivity"></activity>
+        <activity android:name=".activities.ProfileDisplayActivity" />
+        <activity android:name=".activities.OfferApplicationsActivity" />
+        <activity android:name=".activities.OfferEditActivity" />
+        <activity android:name=".activities.BusinessProfileActivity" />
+        <activity android:name=".activities.BusinessSettingsActivity" />
         <activity
-            android:name=".activities.MainActivity"
+            android:name=".activities.BusinessMainActivity"
+            android:label="@string/title_activity_business_main"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".activities.OfferDetailActivity" />
+        <activity
+            android:name=".activities.StudentProfileActivity"
+            android:label="@string/title_activity_student_profile"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".activities.StudentSettingsActivity"
+            android:label="@string/title_activity_student_settings" />
+        <activity android:name=".activities.RegisterActivity" />
+        <activity
+            android:name=".activities.StudentMainActivity"
             android:label="@string/title_activity_main"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity

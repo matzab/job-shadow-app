@@ -13,63 +13,77 @@
         tools:layout_editor_absoluteY="8dp">
 
         <LinearLayout
-            android:id="@+id/register_linear_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <EditText
-                android:id="@+id/role_text"
+            <LinearLayout
+                android:id="@+id/register_linear_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:ems="10"
-                android:inputType="textPersonName"
-                android:text="@string/role_text" />
+                android:orientation="vertical">
 
-            <CheckBox
-                android:id="@+id/student_check_box"
+                <EditText
+                    android:id="@+id/role_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:inputType="textPersonName"
+                    android:text="@string/role_text" />
+
+                <CheckBox
+                    android:id="@+id/student_check_box"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:checked="true"
+                    android:text="@string/check_student" />
+
+                <CheckBox
+                    android:id="@+id/business_check_box"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/check_business" />
+
+                <View
+                    android:id="@+id/view1"
+                    android:layout_width="fill_parent"
+                    android:layout_height="2dp"
+                    android:layout_marginHorizontal="70dp"
+                    android:layout_marginTop="20dp"
+                    android:background="#B6B6B6" />
+
+                <EditText
+                    android:id="@+id/password_text_field"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:hint="@string/prompt_password"
+                    android:inputType="textPassword" />
+
+                <EditText
+                    android:id="@+id/email_text_field"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:hint="@string/prompt_email"
+                    android:inputType="textEmailAddress" />
+
+                <View
+                    android:id="@+id/view"
+                    android:layout_width="match_parent"
+                    android:layout_height="2dp"
+                    android:layout_marginHorizontal="70dp"
+                    android:layout_marginTop="20dp"
+                    android:background="#B6B6B6" />
+
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/register_button"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:checked="true"
-                android:text="@string/check_student" />
-
-            <CheckBox
-                android:id="@+id/business_check_box"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/check_business" />
-
-            <View
-                android:id="@+id/view1"
-                android:layout_width="fill_parent"
-                android:layout_height="2dp"
-                android:layout_marginHorizontal="70dp"
-                android:layout_marginTop="20dp"
-                android:background="#B6B6B6" />
-
-            <EditText
-                android:id="@+id/password_text_field"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:ems="10"
-                android:hint="@string/prompt_password"
-                android:inputType="textPassword" />
-
-            <EditText
-                android:id="@+id/email_text_field"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:ems="10"
-                android:hint="@string/prompt_email"
-                android:inputType="textEmailAddress" />
-
-            <View
-                android:id="@+id/view"
-                android:layout_width="match_parent"
-                android:layout_height="2dp"
-                android:layout_marginHorizontal="70dp"
-                android:layout_marginTop="20dp"
-                android:background="#B6B6B6" />
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:text="@string/action_register" />
 
         </LinearLayout>
     </ScrollView>
