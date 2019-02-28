@@ -52,7 +52,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
      * TODO: remove after connecting to a real authentication system.
      */
     private static final String[] DUMMY_CREDENTIALS = new String[]{
-            "1@1:11111", "bar@example.com:world"
+            "1@1:11111:student", "2@2:22222:business"
     };
     /**
      * Keep track of the login task to ensure we can cancel it if requested.
@@ -310,6 +310,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 
         private final String mEmail;
         private final String mPassword;
+        private String mRole;
 
         UserLoginTask(String email, String password) {
             mEmail = email;
@@ -331,6 +332,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                 String[] pieces = credential.split(":");
                 if (pieces[0].equals(mEmail)) {
                     // Account exists, return true if the password matches.
+                    mRole = pieces[2];
                     return pieces[1].equals(mPassword);
                 }
             }
@@ -345,8 +347,13 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             showProgress(false);
 
             if (success) {
-                Intent intent = new Intent(LoginActivity.this, StudentMainActivity.class);
-                LoginActivity.this.startActivity(intent);
+                if (mRole.equals("business")) {
+                    Intent intent = new Intent(LoginActivity.this, BusinessMainActivity.class);
+                    LoginActivity.this.startActivity(intent);
+                } else if(mRole.equals("student")) {
+                    Intent intent = new Intent(LoginActivity.this, StudentMainActivity.class);
+                    LoginActivity.this.startActivity(intent);
+                }
                 finish();
             } else {
                 mPasswordView.setError(getString(R.string.error_incorrect_password));

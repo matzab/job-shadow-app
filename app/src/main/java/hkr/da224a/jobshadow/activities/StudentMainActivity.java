@@ -17,12 +17,13 @@ import hkr.da224a.jobshadow.R;
 
 public class StudentMainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
-    String[] temporaryData = {"hello","this","is","a","set","of","test","data"};
+
+    String[] temporaryData = {"HELLO","THIS","IS","A","SET","OF","TEST","DATA"};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_student_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -39,7 +40,7 @@ public class StudentMainActivity extends AppCompatActivity
         recyclerView.setHasFixedSize(true);
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
-        RecyclerView.Adapter mAdapter = new OfferListAdapter(temporaryData);
+        RecyclerView.Adapter mAdapter = new OfferListAdapter(this, temporaryData);
         recyclerView.setAdapter(mAdapter);
     }
 
@@ -56,7 +57,7 @@ public class StudentMainActivity extends AppCompatActivity
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.main, menu);
+        getMenuInflater().inflate(R.menu.student_main, menu);
         return true;
     }
 
@@ -94,6 +95,7 @@ public class StudentMainActivity extends AppCompatActivity
 
             Intent intent = new Intent(StudentMainActivity.this, LoginActivity.class);
             StudentMainActivity.this.startActivity(intent);
+            finish();
 
         } else if (id == R.id.nav_applications) {
 
