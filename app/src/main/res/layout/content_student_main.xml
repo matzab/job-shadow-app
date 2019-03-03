@@ -2,14 +2,9 @@
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/const_lay"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context=".activities.StudentMainActivity"
-    tools:showIn="@layout/app_bar_student_main">
-
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/offer_view"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" />
-</android.support.constraint.ConstraintLayout>
+    tools:context=".activities.student_activities.StudentMainActivity"
+    tools:showIn="@layout/app_bar_student_main"/>

@@ -1,4 +1,4 @@
-package hkr.da224a.jobshadow.activities;
+package hkr.da224a.jobshadow.activities.offer_activities;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
@@ -17,8 +17,21 @@ public class OfferDetailActivity extends AppCompatActivity {
         TextView textView = (TextView) findViewById(R.id.text_view);
         Intent intent = getIntent();
         String offerName = intent.getStringExtra("selected_offer");
-        System.out.println(offerName);
         textView.setText(offerName);
 
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+
+    }
+
+
+
+
+
+
+    @Override
+    public boolean onSupportNavigateUp() {
+        onBackPressed();
+        return true;
     }
 }

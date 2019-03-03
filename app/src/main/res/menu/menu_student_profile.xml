@@ -1,7 +1,7 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context="hkr.da224a.jobshadow.activities.StudentProfileActivity">
+    tools:context="hkr.da224a.jobshadow.activities.student_activities.StudentProfileActivity">
     <item
         android:id="@+id/action_settings"
         android:orderInCategory="100"

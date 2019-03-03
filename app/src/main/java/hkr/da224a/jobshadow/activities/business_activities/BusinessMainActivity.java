@@ -1,4 +1,4 @@
-package hkr.da224a.jobshadow.activities;
+package hkr.da224a.jobshadow.activities.business_activities;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -15,6 +15,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import hkr.da224a.jobshadow.R;
+import hkr.da224a.jobshadow.activities.LoginActivity;
 
 public class BusinessMainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -80,7 +81,7 @@ public class BusinessMainActivity extends AppCompatActivity
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
-        // Handle navigation view item clicks here.
+        // Handle navigation_bar view item clicks here.
         int id = item.getItemId();
 
         if (id == R.id.nav_settings) {

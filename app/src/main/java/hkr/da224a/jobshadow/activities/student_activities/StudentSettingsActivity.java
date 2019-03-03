@@ -1,4 +1,4 @@
-package hkr.da224a.jobshadow.activities;
+package hkr.da224a.jobshadow.activities.student_activities;
 
 import android.annotation.TargetApi;
 import android.content.Context;
@@ -20,6 +20,7 @@ import android.text.TextUtils;
 import android.view.MenuItem;
 
 import hkr.da224a.jobshadow.R;
+import hkr.da224a.jobshadow.activities.AppCompatPreferenceActivity;
 
 import java.util.List;
 

@@ -28,7 +28,7 @@
     <string name="location_text">Please enter your location</string>
 
 
-    <!-- Strings related to menu navigation -->
+    <!-- Strings related to menu navigation_bar -->
     <string name="action_profile">Profile</string>
     <string name="action_logout">Log out</string>
     <string name="action_my_applications">My applications</string>
@@ -197,6 +197,12 @@
         "when a user tries to pick up one of cards.\n\n"
     </string>
     <string name="title_activity_business_main">BusinessMainActivity</string>
+
+
+    <!-- bottom navigation_bar -->
+    <string name="title_home">Home</string>
+    <string name="title_notifications">Notifications</string>
+    <string name="title_search">Search</string>
 
 
 </resources>

@@ -15,27 +15,33 @@
         android:theme="@style/AppTheme">
         <activity android:name=".activities.MyApplicationsActivity"></activity>
         <activity android:name=".activities.ProfileDisplayActivity" />
-        <activity android:name=".activities.OfferApplicationsActivity" />
-        <activity android:name=".activities.OfferEditActivity" />
-        <activity android:name=".activities.BusinessProfileActivity" />
-        <activity android:name=".activities.BusinessSettingsActivity" />
+        <activity android:name=".activities.offer_activities.OfferApplicationsActivity" />
+        <activity android:name=".activities.offer_activities.OfferEditActivity" />
+        <activity android:name=".activities.business_activities.BusinessProfileActivity" />
+        <activity android:name=".activities.business_activities.BusinessSettingsActivity" />
         <activity
-            android:name=".activities.BusinessMainActivity"
+            android:name=".activities.business_activities.BusinessMainActivity"
             android:label="@string/title_activity_business_main"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".activities.OfferDetailActivity" />
+        <activity android:name=".activities.offer_activities.OfferDetailActivity" />
         <activity
-            android:name=".activities.StudentProfileActivity"
+            android:name=".activities.student_activities.StudentProfileActivity"
             android:label="@string/title_activity_student_profile"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".activities.StudentSettingsActivity"
+            android:name=".activities.student_activities.StudentSettingsActivity"
             android:label="@string/title_activity_student_settings" />
         <activity android:name=".activities.RegisterActivity" />
         <activity
-            android:name=".activities.StudentMainActivity"
+            android:name=".activities.student_activities.StudentMainActivity"
             android:label="@string/title_activity_main"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/AppTheme.NoActionBar" >
+        <intent-filter>
+            <action android:name="android.intent.action.MAIN" />
+
+            <category android:name="android.intent.category.LAUNCHER" />
+        </intent-filter>
+        </activity>
         <activity
             android:name=".activities.LoginActivity"
             android:label="@string/app_name">

@@ -1,4 +1,4 @@
-package hkr.da224a.jobshadow.activities;
+package hkr.da224a.jobshadow.activities.offer_activities;
 
 import android.content.Context;
 import android.content.Intent;
@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import hkr.da224a.jobshadow.R;
+
 
 public class OfferListAdapter extends RecyclerView.Adapter<OfferListAdapter.MyViewHolder> {
     private String[] mDataset;

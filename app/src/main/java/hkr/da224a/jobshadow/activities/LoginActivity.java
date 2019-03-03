@@ -34,6 +34,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import hkr.da224a.jobshadow.R;
+import hkr.da224a.jobshadow.activities.business_activities.BusinessMainActivity;
+import hkr.da224a.jobshadow.activities.student_activities.StudentMainActivity;
 
 import static android.Manifest.permission.READ_CONTACTS;
 
