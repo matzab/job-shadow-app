@@ -28,6 +28,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Switch;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -39,7 +40,8 @@ import hkr.da224a.jobshadow.activities.business_activities.BusinessMainActivity;
 import hkr.da224a.jobshadow.activities.student_activities.StudentMainActivity;
 import hkr.da224a.jobshadow.model.Business;
 import hkr.da224a.jobshadow.model.Student;
-import hkr.da224a.jobshadow.utils.DatabaseHelper;
+import hkr.da224a.jobshadow.utils.FirebaseDatabaseHelper;
+import hkr.da224a.jobshadow.utils.SQLiteDatabaseHelper;
 
 import static android.Manifest.permission.READ_CONTACTS;
 
@@ -63,7 +65,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
     /**
      * Database Functionality Object
      */
-    private DatabaseHelper databaseHelper;
+    private SQLiteDatabaseHelper SQLiteDatabaseHelper;
 
     private UserLoginTask mAuthTask = null;
 
@@ -77,13 +79,13 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-
         initializeWidgets();
+        new FirebaseDatabaseHelper(getApplicationContext());
     }
 
     private void initializeWidgets() {
 
-        databaseHelper = new DatabaseHelper(getApplicationContext());
+        SQLiteDatabaseHelper = new SQLiteDatabaseHelper(getApplicationContext());
 
         mEmailView = findViewById(R.id.email);
         populateAutoComplete();
@@ -352,10 +354,10 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             Switch accountTypeSwitch = findViewById(R.id.accountTypeSwitch);
             if (accountTypeSwitch.isChecked()) {
                 mRole = Business.getAccountType();
-                return databaseHelper.checkBusinessCredentials(mEmail, mPassword);
+                return SQLiteDatabaseHelper.checkBusinessCredentials(mEmail, mPassword);
             } else {
                 mRole = Student.getAccountType();
-                return databaseHelper.checkStudentCredentials(mEmail, mPassword);
+                return SQLiteDatabaseHelper.checkStudentCredentials(mEmail, mPassword);
             }
         }
 
@@ -372,6 +374,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                     Intent intent = new Intent(LoginActivity.this, StudentMainActivity.class);
                     LoginActivity.this.startActivity(intent);
                 }
+                Toast.makeText(LoginActivity.this, "Login Successful", Toast.LENGTH_SHORT).show();
                 finish();
             } else {
                 mPasswordView.setError(getString(R.string.error_incorrect_password));

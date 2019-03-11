@@ -5,6 +5,8 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.util.Log;
 
 import java.sql.Timestamp;
@@ -14,14 +16,16 @@ import java.util.Calendar;
 import hkr.da224a.jobshadow.model.Application;
 import hkr.da224a.jobshadow.model.Business;
 import hkr.da224a.jobshadow.model.Offer;
+import hkr.da224a.jobshadow.model.OfferCategory;
 import hkr.da224a.jobshadow.model.Student;
 
 /**
  * The type Database helper.
  */
-public class DatabaseHelper extends SQLiteOpenHelper {
+public class SQLiteDatabaseHelper extends SQLiteOpenHelper {
 
-    private static final String TAG = "DatabaseHelper";
+    private static final String TAG = "SQLiteDatabaseHelper";
+    private Context context;
 
     // Database Version
     private static int DATABASE_VERSION = 1;
@@ -33,10 +37,12 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     private static final String TABLE_STUDENT = "studentTable";
     // Business table name
     private static final String TABLE_BUSINESS = "businessTable";
-    // OFFER table name
+    // Offer table name
     private static final String TABLE_OFFER = "offerTable";
-    // Skill table name
+    // Application table name
     private static final String TABLE_APPLICATION = "applicationTable";
+    // Application table name
+    private static final String TABLE_OFFER_CATEGORY = "offerCategoryTable";
 
     // Student Table Columns names
     private static final String COLUMN_STUDENT_ACCOUNT_TYPE = "account_type";
@@ -83,6 +89,10 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     private static final String COLUMN_APPLICATION_STUDENT_ID = "student_id";
     private static final String COLUMN_APPLICATION_OFFER_ID = "offer_id";
     private static final String COLUMN_APPLICATION_DATE = "date_created";
+
+    // Offer Category Table Columns names
+    private static final String COLUMN_CATEGORY_ID = "category_id";
+    private static final String COLUMN_CATEGORY_NAME = "category_name";
 
 
     // create table sql query for student table
@@ -136,23 +146,29 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             + COLUMN_APPLICATION_ID + " INTEGER PRIMARY KEY AUTOINCREMENT,"
             + COLUMN_APPLICATION_STUDENT_ID + " INTEGER,"
             + COLUMN_APPLICATION_OFFER_ID + " INTEGER,"
-            + COLUMN_APPLICATION_DATE + " DATE" +  ")";
+            + COLUMN_APPLICATION_DATE + " DATE" + ")";
 
-
+    // create table sql query for application table
+    private String CREATE_OFFER_CATEGORY_TABLE = "CREATE TABLE "
+            + TABLE_OFFER_CATEGORY + "("
+            + COLUMN_CATEGORY_ID + " INTEGER PRIMARY KEY AUTOINCREMENT,"
+            + COLUMN_CATEGORY_NAME + " VARCHAR" + ")";
 
     // drop table sql query
     private String DROP_USER_TABLE = "DROP TABLE IF EXISTS " + TABLE_STUDENT;
     private String DROP_BUSINESS_TABLE = "DROP TABLE IF EXISTS " + TABLE_BUSINESS;
     private String DROP_OFFER_TABLE = "DROP TABLE IF EXISTS " + TABLE_OFFER;
     private String DROP_APPLICATION_TABLE = "DROP TABLE IF EXISTS " + TABLE_APPLICATION;
+    private String DROP_CATEGORY_TABLE = "DROP TABLE IF EXISTS " + TABLE_OFFER_CATEGORY;
 
     /**
      * Constructor
      *
      * @param context the context
      */
-    public DatabaseHelper(Context context) {
+    public SQLiteDatabaseHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
+        this.context = context;
     }
 
     @Override
@@ -161,6 +177,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.execSQL(CREATE_BUSINESS_TABLE);
         db.execSQL(CREATE_APPLICATION_TABLE);
         db.execSQL(CREATE_OFFER_TABLE);
+        db.execSQL(CREATE_OFFER_CATEGORY_TABLE);
     }
 
 
@@ -172,6 +189,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.execSQL(DROP_BUSINESS_TABLE);
         db.execSQL(DROP_APPLICATION_TABLE);
         db.execSQL(DROP_OFFER_TABLE);
+        db.execSQL(DROP_CATEGORY_TABLE);
 
         // Create tables again
         onCreate(db);
@@ -186,7 +204,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
      *
      * @param student the student
      */
-    public void addStudent(Student student) {
+    public boolean addStudent(Student student) {
         SQLiteDatabase db = this.getWritableDatabase();
 
         ContentValues values = new ContentValues();
@@ -209,6 +227,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         Log.e(TAG, "INSERTED INTO STUDENT TABLE");
         Log.e(TAG, student.toString());
         db.close();
+
+        return FirebaseDatabaseHelper.signInNewStudent(student);
     }
 
     /**
@@ -321,7 +341,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         // delete user record by id
         db.delete(TABLE_STUDENT, COLUMN_STUDENT_ID + " = ?",
                 new String[]{String.valueOf(student.getStudentID())});
-        Log.e(TAG, "DELTED FROM STUDENT TABLE");
+        Log.e(TAG, "DELETED FROM STUDENT TABLE");
         Log.e(TAG, student.toString());
         db.close();
     }
@@ -335,6 +355,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
      */
     public boolean checkStudentCredentials(String email, String password) {
 
+        if (isNetworkAvailable()) {
+            FirebaseDatabaseHelper.loginUser(email, password);
+        }
         // array of columns to fetch
         String[] columns = {
                 COLUMN_STUDENT_ID
@@ -366,6 +389,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.close();
         return cursorCount > 0;
 
+
     }
 
     /**
@@ -395,7 +419,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
      *
      * @param business the business
      */
-    public void addBusiness(Business business) {
+    public boolean addBusiness(Business business) {
         SQLiteDatabase db = this.getWritableDatabase();
 
         ContentValues values = new ContentValues();
@@ -415,6 +439,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         Log.e(TAG, "INSERTED INTO BUSINESS TABLE");
         Log.e(TAG, business.toString());
         db.close();
+
+        return FirebaseDatabaseHelper.signInNewBusiness(business);
     }
 
     /**
@@ -537,6 +563,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
      */
     public boolean checkBusinessCredentials(String email, String password) {
 
+        if (isNetworkAvailable()) {
+            FirebaseDatabaseHelper.loginUser(email, password);
+        }
         // array of columns to fetch
         String[] columns = {
                 COLUMN_BUSINESS_ID
@@ -601,7 +630,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
 
         ContentValues values = new ContentValues();
-        values.put(COLUMN_APPLICATION_ID,application.getApplicationID());
+        values.put(COLUMN_APPLICATION_ID, application.getApplicationID());
         values.put(COLUMN_APPLICATION_STUDENT_ID, application.getStudentID());
         values.put(COLUMN_APPLICATION_OFFER_ID, application.getOfferID());
         values.put(COLUMN_APPLICATION_DATE, new Timestamp(Calendar.getInstance().getTime().getTime()).toString());
@@ -673,7 +702,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
      *
      * @param application the application
      */
-    public void updateBusiness(Application application) {
+    public void updateApplication(Application application) {
         SQLiteDatabase db = this.getWritableDatabase();
 
         ContentValues values = new ContentValues();
@@ -696,7 +725,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
      *
      * @param application the application
      */
-    public void deleteBusiness(Application application) {
+    public void deleteApplication(Application application) {
         SQLiteDatabase db = this.getWritableDatabase();
         // delete user record by id
         db.delete(TABLE_APPLICATION, COLUMN_APPLICATION_ID + " = ?",
@@ -727,6 +756,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     }
 
     //************************************** OFFER CRUD FUNCTIONALITY *********************************************//
+
     /**
      * This method is to create application record
      *
@@ -736,7 +766,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
 
         ContentValues values = new ContentValues();
-        values.put(COLUMN_OFFER_ID,offer.getOfferID());
+        values.put(COLUMN_OFFER_ID, offer.getOfferID());
         values.put(COLUMN_OFFER_BUSINESS_ID, offer.getBusinessID());
         values.put(COLUMN_OFFER_CATEGORY_ID, offer.getCategoryID());
         values.put(COLUMN_OFFER_TITLE, offer.getOfferTitle());
@@ -747,7 +777,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         values.put(COLUMN_OFFER_DATE_CREATED, new Timestamp(Calendar.getInstance().getTime().getTime()).toString());
 
         // Inserting Row
-        db.insert(TABLE_APPLICATION, null, values);
+        db.insert(TABLE_OFFER, null, values);
         Log.e(TAG, "INSERTED INTO OFFER TABLE");
         Log.e(TAG, offer.toString());
         db.close();
@@ -878,5 +908,140 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         Log.e(TAG, "SEARCH OFFER FROM OFFER TABLE");
         Log.e(TAG, returnedApplication.toString());
         return returnedApplication;
+    }
+
+    //************************************** OFFER CATEGORY CRUD FUNCTIONALITY *********************************************//
+
+    /**
+     * This method is to create application record
+     *
+     * @param offerCategory the offer category
+     */
+    public void addOfferCategory(OfferCategory offerCategory) {
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        ContentValues values = new ContentValues();
+        values.put(COLUMN_CATEGORY_ID, offerCategory.getCategoryID());
+        values.put(COLUMN_CATEGORY_NAME, offerCategory.getCategoryName());
+
+        // Inserting Row
+        db.insert(TABLE_OFFER_CATEGORY, null, values);
+        Log.e(TAG, "INSERTED INTO OFFER_CATEGORY TABLE");
+        Log.e(TAG, offerCategory.toString());
+        db.close();
+    }
+
+    /**
+     * This method is to fetch all applications and return the list of application records
+     *
+     * @return list all businesses
+     */
+    public ArrayList<OfferCategory> getAllOfferCategories() {
+        // array of columns to fetch
+        String[] columns = {
+                COLUMN_CATEGORY_ID,
+                COLUMN_CATEGORY_NAME
+        };
+        // sorting orders
+        String sortOrder =
+                COLUMN_APPLICATION_ID + " ASC";
+        ArrayList<OfferCategory> applicationArrayList = new ArrayList<>();
+
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        // query the user table
+        /*
+         * Here query function is used to fetch records from user table this function works like we use sql query.
+         * SQL query equivalent to this query function is
+         * SELECT user_id,user_name,user_email,user_password FROM user ORDER BY user_name;
+         */
+        Cursor cursor = db.query(TABLE_OFFER_CATEGORY, //Table to query
+                columns,    //columns to return
+                null,        //columns for the WHERE clause
+                null,        //The values for the WHERE clause
+                null,       //group the rows
+                null,       //filter by row groups
+                sortOrder); //The sort order
+
+
+        // Traversing through all rows and adding to list
+        if (cursor.moveToFirst()) {
+            do {
+                OfferCategory offerCategory = new OfferCategory();
+                offerCategory.setCategoryID(Integer.parseInt(cursor.getString(cursor.getColumnIndex(COLUMN_CATEGORY_ID))));
+                offerCategory.setCategoryName(cursor.getString(cursor.getColumnIndex(COLUMN_CATEGORY_NAME)));
+
+                // Adding user record to list
+                applicationArrayList.add(offerCategory);
+            } while (cursor.moveToNext());
+        }
+        cursor.close();
+        db.close();
+
+        // return user list
+        return applicationArrayList;
+    }
+
+    /**
+     * This method to update application record
+     *
+     * @param offerCategory the offerCategory
+     */
+    public void updateOfferId(OfferCategory offerCategory) {
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        ContentValues values = new ContentValues();
+        values.put(COLUMN_CATEGORY_ID, offerCategory.getCategoryID());
+        values.put(COLUMN_CATEGORY_NAME, offerCategory.getCategoryName());
+
+
+        // updating row
+        db.update(TABLE_OFFER_CATEGORY, values, COLUMN_CATEGORY_ID + " = ?",
+                new String[]{String.valueOf(offerCategory.getCategoryID())});
+        Log.e(TAG, "UPDATED OFFER_CATEGORY FROM APPLICATION TABLE");
+        Log.e(TAG, offerCategory.toString());
+        db.close();
+    }
+
+    /**
+     * This method is to delete application record
+     *
+     * @param offerCategory the offerCategory
+     */
+    public void deleteOfferCategory(OfferCategory offerCategory) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        // delete offer_category record by id
+        db.delete(TABLE_OFFER_CATEGORY, COLUMN_CATEGORY_ID + " = ?",
+                new String[]{String.valueOf(offerCategory.getCategoryID())});
+        Log.e(TAG, "DELETED APPLICATION FROM APPLICATION TABLE");
+        Log.e(TAG, offerCategory.toString());
+        db.close();
+    }
+
+    /**
+     * Gets business.
+     *
+     * @param id the id
+     * @return the Application
+     */
+    public OfferCategory getOfferCategory(int id) {
+        OfferCategory returnedOfferCategory = null;
+        ArrayList<OfferCategory> applicationArrayList = this.getAllOfferCategories();
+        for (int i = 0; i < applicationArrayList.size(); i++) {
+            if (applicationArrayList.get(i).getCategoryID() == id) {
+                returnedOfferCategory = applicationArrayList.get(i);
+                return returnedOfferCategory;
+            }
+        }
+        Log.e(TAG, "SEARCH OFFER_CATEGORY FROM OFFER_CATEGORY TABLE");
+        Log.e(TAG, returnedOfferCategory.toString());
+        return returnedOfferCategory;
+    }
+
+    private boolean isNetworkAvailable() {
+        ConnectivityManager connectivityManager
+                = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
+        return activeNetworkInfo != null && activeNetworkInfo.isConnected();
     }
 }

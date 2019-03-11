@@ -1,5 +1,6 @@
 package hkr.da224a.jobshadow.activities;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -17,7 +18,7 @@ import java.util.regex.Pattern;
 import hkr.da224a.jobshadow.R;
 import hkr.da224a.jobshadow.model.Business;
 import hkr.da224a.jobshadow.model.Student;
-import hkr.da224a.jobshadow.utils.DatabaseHelper;
+import hkr.da224a.jobshadow.utils.SQLiteDatabaseHelper;
 
 public class RegisterActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -35,7 +36,9 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
     private Button register_button;
 
     private UserRegisterTask mAuthTask = null;
-    private DatabaseHelper databaseHelper;
+    private SQLiteDatabaseHelper SQLiteDatabaseHelper;
+
+    private ProgressDialog pd;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,7 +56,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         register_button = findViewById(R.id.register_button);
         register_button.setOnClickListener(this);
 
-        databaseHelper = new DatabaseHelper(getApplicationContext());
+        SQLiteDatabaseHelper = new SQLiteDatabaseHelper(getApplicationContext());
     }
 
     @Override
@@ -129,6 +132,8 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
             // form field with an error.
             focusView.requestFocus();
         } else {
+            pd = new ProgressDialog(RegisterActivity.this);
+            pd.show();
             mAuthTask = new RegisterActivity.UserRegisterTask(email, password, role);
             mAuthTask.execute((Void) null);
         }
@@ -170,7 +175,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                 business.setVerified(false);
                 business.setWebsite("0");
 
-                databaseHelper.addBusiness(business);
+                SQLiteDatabaseHelper.addBusiness(business);
                 return true;
             } else {
                 Student student = new Student();
@@ -183,7 +188,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                 student.setDateOfBirth("0");
                 student.setDescription("0");
 
-                databaseHelper.addStudent(student);
+                SQLiteDatabaseHelper.addStudent(student);
                 return true;
             }
         }
@@ -195,7 +200,8 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
             if (success) {
                 Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
                 startActivity(intent);
-
+                Toast.makeText(RegisterActivity.this, "Registered Successfully", Toast.LENGTH_SHORT).show();
+                pd.cancel();
                 finish();
             } else {
                 password_text_field.setError(getString(R.string.error_incorrect_password));
