@@ -206,6 +206,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
             } else {
                 password_text_field.setError(getString(R.string.error_incorrect_password));
                 password_text_field.requestFocus();
+                pd.cancel();
             }
         }
 

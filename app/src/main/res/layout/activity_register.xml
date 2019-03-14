@@ -59,8 +59,7 @@
                     android:layout_height="wrap_content"
                     android:ems="10"
                     android:hint="@string/prompt_password"
-                    android:inputType="textPassword"
-                    android:text="123123" />
+                    android:inputType="textPassword" />
 
                 <AutoCompleteTextView
                     android:id="@+id/email_text_field"
@@ -68,8 +67,7 @@
                     android:layout_height="wrap_content"
                     android:ems="10"
                     android:hint="@string/prompt_email"
-                    android:inputType="textEmailAddress"
-                    android:text="s1@t.com" />
+                    android:inputType="textEmailAddress" />
 
                 <View
                     android:id="@+id/view"

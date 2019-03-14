@@ -49,7 +49,6 @@ public class Business {
         this.contactEmail = contactEmail;
         this.verified = verified;
         this.website = website;
-        this.dateCreated = dateCreated;
     }
 
     /**

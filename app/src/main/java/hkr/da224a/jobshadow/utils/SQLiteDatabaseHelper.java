@@ -228,7 +228,7 @@ public class SQLiteDatabaseHelper extends SQLiteOpenHelper {
         Log.e(TAG, student.toString());
         db.close();
 
-        return FirebaseDatabaseHelper.signInNewStudent(student);
+        return FirebaseDatabaseHelper.createNewStudentAccount(student);
     }
 
     /**
@@ -440,7 +440,7 @@ public class SQLiteDatabaseHelper extends SQLiteOpenHelper {
         Log.e(TAG, business.toString());
         db.close();
 
-        return FirebaseDatabaseHelper.signInNewBusiness(business);
+        return FirebaseDatabaseHelper.createNewBusiness(business);
     }
 
     /**
