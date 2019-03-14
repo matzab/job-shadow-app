@@ -2,6 +2,7 @@ package hkr.da224a.jobshadow.activities;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
+import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
 import android.app.LoaderManager.LoaderCallbacks;
 import android.content.CursorLoader;
@@ -30,7 +31,9 @@ import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -38,7 +41,10 @@ import java.util.regex.Pattern;
 import hkr.da224a.jobshadow.R;
 import hkr.da224a.jobshadow.activities.business_activities.BusinessMainActivity;
 import hkr.da224a.jobshadow.activities.student_activities.StudentMainActivity;
+import hkr.da224a.jobshadow.model.Application;
 import hkr.da224a.jobshadow.model.Business;
+import hkr.da224a.jobshadow.model.Offer;
+import hkr.da224a.jobshadow.model.OfferCategory;
 import hkr.da224a.jobshadow.model.Student;
 import hkr.da224a.jobshadow.utils.FirebaseDatabaseHelper;
 import hkr.da224a.jobshadow.utils.SQLiteDatabaseHelper;
@@ -104,9 +110,19 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 
         Button mEmailSignInButton = findViewById(R.id.email_sign_in_button);
         mEmailSignInButton.setOnClickListener(new OnClickListener() {
+            @SuppressLint("StaticFieldLeak")
             @Override
             public void onClick(View view) {
                 attemptLogin();
+//                new FirebaseDatabaseHelper(getApplicationContext());
+//                new AsyncTask<Void, Void, Void>() {
+//                    @Override
+//                    protected Void doInBackground(Void... voids) {
+//                        FirebaseDatabaseHelper.createNewApplication(new Application(1,1,
+//                                1,new Timestamp(Calendar.getInstance().getTime().getTime())));
+//                        return null;
+//                    }
+//                }.execute();
             }
         });
 
