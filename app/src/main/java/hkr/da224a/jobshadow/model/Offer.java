@@ -1,11 +1,14 @@
 package hkr.da224a.jobshadow.model;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import java.sql.Timestamp;
 
 /**
  * The type Offer.
  */
-public class Offer {
+public class Offer implements Parcelable {
 
     private int offerID;
     private int businessID;
@@ -228,5 +231,44 @@ public class Offer {
                 ", description='" + description + '\'' +
                 ", dateCreated='" + dateCreated + '\'' +
                 '}';
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeInt(offerID);
+        dest.writeInt(businessID);
+        dest.writeInt(categoryID);
+        dest.writeString(offerTitle);
+        dest.writeString(offerLength);
+        dest.writeString(offerPositionQuals);
+        dest.writeString(offerLocation);
+        dest.writeString(description);
+    }
+
+    // this is used to regenerate your object. All Parcelables must have a CREATOR that implements these two methods
+    public static final Parcelable.Creator<Offer> CREATOR = new Parcelable.Creator<Offer>() {
+        public Offer createFromParcel(Parcel in) {
+            return new Offer(in);
+        }
+
+        public Offer[] newArray(int size) {
+            return new Offer[size];
+        }
+    };
+
+    public Offer(Parcel in){
+        offerID = in.readInt();
+        businessID = in.readInt();
+        categoryID = in.readInt();
+        offerTitle = in.readString();
+        offerLength = in.readString();
+        offerPositionQuals = in.readString();
+        offerLocation = in.readString();
+        description = in.readString();
     }
 }

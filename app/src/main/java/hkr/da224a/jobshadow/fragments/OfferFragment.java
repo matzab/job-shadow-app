@@ -11,15 +11,22 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import java.sql.Timestamp;
+
 import hkr.da224a.jobshadow.R;
 import hkr.da224a.jobshadow.activities.offer_activities.OfferListAdapter;
+import hkr.da224a.jobshadow.model.Offer;
 
 /**
  * A simple {@link Fragment} subclass.
  */
 public class OfferFragment extends Fragment {
 
-    private String[] temporaryData = {"HELLO", "THIS", "IS", "A", "SET", "OF", "TEST", "DATA"};
+    private Offer[] temporaryData =
+            {new Offer(1, 1, 1, "Senior Software Engineer", "March 15 - April 7", "5 years of experience in the field of software engineering"
+                    , "Kristianstad", "You will join our Senior Software Engineer who is currently working on a new product concerning fridge software.", new Timestamp(1)),
+                    new Offer(2, 1, 1, "Java Developer", "March 15 - April 7", "1 year of experience with Java"
+                            , "Kristianstad", "You will join our Java Developer who is currently working on managing one of our Java systems.", new Timestamp(1))};
 
     public OfferFragment() {
         // Required empty public constructor
