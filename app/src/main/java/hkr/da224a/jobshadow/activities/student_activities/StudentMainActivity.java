@@ -55,7 +55,6 @@ public class StudentMainActivity extends AppCompatActivity
             @Override
             public void onPageSelected(int i) {
                 int currentItem = viewPager.getCurrentItem();
-                System.out.println(currentItem + "CURRENT ITEM");
                 if (backStack.empty())
                     backStack.push(0);
 
