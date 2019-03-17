@@ -41,10 +41,7 @@ public class StudentMainActivity extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_student_main);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
 
-        setToolbar(toolbar,"Home");
 
         viewPager = (NoSwipeViewPager) findViewById(R.id.main_menu_holder);
         viewPager.setPagingEnabled(false);
@@ -60,16 +57,12 @@ public class StudentMainActivity extends AppCompatActivity
                 if (backStack.empty())
                     backStack.push(0);
 
-                if(backStack.contains(currentItem)) {
+                if (backStack.contains(currentItem)) {
                     backStack.remove(backStack.indexOf(currentItem));
                     backStack.push(currentItem);
-                }else{
+                } else {
                     backStack.push(currentItem);
                 }
-
-                bottomNav.setSelectedItemId(currentItem);
-            //    bottomNav.set
-
             }
 
             @Override
@@ -77,10 +70,6 @@ public class StudentMainActivity extends AppCompatActivity
 
             }
         });
-
-        setupViewPager(viewPager);
-
-
 
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
@@ -97,7 +86,6 @@ public class StudentMainActivity extends AppCompatActivity
                         getSupportActionBar().setTitle("Home");
                         return true;
                     case R.id.navigation_search:
-
                         viewPager.setCurrentItem(1);
                         getSupportActionBar().setTitle("Search");
                         return true;
@@ -109,18 +97,9 @@ public class StudentMainActivity extends AppCompatActivity
                 return false;
             }
         });
+        setupViewPager(viewPager);
     }
 
-
-//    private void openFragment(Fragment fragment) {
-//        FragmentManager fragmentManager = getSupportFragmentManager();
-//        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-//
-//        fragmentTransaction.replace(R.id.main_menu_holder, fragment);
-//        fragmentTransaction.addToBackStack(null);
-//
-//        fragmentTransaction.commit();
-//    }
 
     @Override
     public void onBackPressed() {
@@ -130,12 +109,24 @@ public class StudentMainActivity extends AppCompatActivity
 
         }
 
-        if(backStack.size() > 1){
+        if (backStack.size() > 1) {
             backStack.pop();
-            viewPager.setCurrentItem(backStack.lastElement());
-            Menu menu  = bottomNav.getMenu();
-            MenuItem item = menu.getItem(backStack.lastElement());
+            int i = backStack.lastElement();
+            viewPager.setCurrentItem(i);
+            Menu menu = bottomNav.getMenu();
+            MenuItem item = menu.getItem(i);
             item.setChecked(true);
+            switch (i) {
+                case 0:
+                    getSupportActionBar().setTitle("Home");
+                    break;
+                case 1:
+                    getSupportActionBar().setTitle("Search");
+                    break;
+                case 2:
+                    getSupportActionBar().setTitle("Notifications");
+                    break;
+            }
         }
     }
 
@@ -180,7 +171,7 @@ public class StudentMainActivity extends AppCompatActivity
         viewPager.setAdapter(viewPagerAdapter);
     }
 
-    public void setToolbar(Toolbar toolbar, String title){
+    public void setToolbar(Toolbar toolbar) {
         AppCompatActivity actionBar = this;
         actionBar.setSupportActionBar(toolbar);
 
@@ -190,8 +181,7 @@ public class StudentMainActivity extends AppCompatActivity
         drawer.addDrawerListener(toggle);
         toggle.setDrawerIndicatorEnabled(true);
         toggle.syncState();
+        toolbar.setTitle("Home");
 
-        if(toolbar != null)
-            toolbar.setTitle(title);
     }
 }

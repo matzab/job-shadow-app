@@ -3,6 +3,7 @@ package hkr.da224a.jobshadow.activities.student_activities;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 
@@ -21,6 +22,7 @@ public class StudentProfileActivity extends AppCompatActivity {
         setContentView(R.layout.activity_student_profile);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        setupActionBar();
 
         final ViewPager viewPager = (ViewPager) findViewById(R.id.tab_viewpager);
         setupViewPager(viewPager);
@@ -28,8 +30,6 @@ public class StudentProfileActivity extends AppCompatActivity {
 
         setupViewPager(viewPager);
 
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setDisplayShowHomeEnabled(true);
 
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tab_menu);
         tabLayout.setupWithViewPager(viewPager);
@@ -38,12 +38,7 @@ public class StudentProfileActivity extends AppCompatActivity {
             public void onTabSelected(TabLayout.Tab tab) {
                 viewPager.setCurrentItem(tab.getPosition());
 
-//                switch (tab.getPosition()) {
-//                    case 0:
-//                        break;
-//                    case 1:
-//                        break;
-//                }
+
             }
 
             @Override
@@ -56,6 +51,15 @@ public class StudentProfileActivity extends AppCompatActivity {
 
             }
         });
+    }
+
+    private void setupActionBar() {
+        ActionBar actionBar = getSupportActionBar();
+        if (actionBar != null) {
+            // Show the Up button in the action bar.
+            actionBar.setDisplayHomeAsUpEnabled(true);
+            actionBar.setDisplayShowHomeEnabled(true);
+        }
     }
 
     @Override

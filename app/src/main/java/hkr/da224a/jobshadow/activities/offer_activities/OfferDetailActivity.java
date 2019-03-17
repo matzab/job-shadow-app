@@ -1,8 +1,10 @@
 package hkr.da224a.jobshadow.activities.offer_activities;
 
 import android.content.Intent;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.widget.TextView;
 
 import hkr.da224a.jobshadow.R;
@@ -14,6 +16,9 @@ public class OfferDetailActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_offer_detail);
+//        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+//        setSupportActionBar(toolbar);
+        setupActionBar();
 
         TextView offerTitle = (TextView) findViewById(R.id.offer_title_text);
         TextView offerLength = (TextView) findViewById(R.id.offer_length_text);
@@ -31,15 +36,20 @@ public class OfferDetailActivity extends AppCompatActivity {
         offerLocation.setText(offer.getOfferLocation());
         offerDescription.setText(offer.getDescription());
 
-//        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-//        getSupportActionBar().setDisplayShowHomeEnabled(true);
+
+
 
     }
 
-
-
-
-
+    private void setupActionBar() {
+        ActionBar actionBar = getSupportActionBar();
+        if (actionBar != null) {
+            // Show the Up button in the action bar.
+            actionBar.setDisplayHomeAsUpEnabled(true);
+            actionBar.setDisplayShowHomeEnabled(true);
+            actionBar.setTitle("Offer details");
+        }
+    }
 
     @Override
     public boolean onSupportNavigateUp() {

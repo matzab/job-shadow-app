@@ -33,6 +33,8 @@ public class SearchFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         setHasOptionsMenu(true);
+        Toolbar searchToolbar =  getActivity().findViewById(R.id.toolbar);
+        ((StudentMainActivity)getActivity()).setToolbar(searchToolbar);
         return inflater.inflate(R.layout.fragment_search, container, false);
     }
 
@@ -40,8 +42,6 @@ public class SearchFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        Toolbar searchToolbar =  getActivity().findViewById(R.id.toolbar);
-        ((StudentMainActivity)getActivity()).setToolbar(searchToolbar,"Search");
 
     }
 
