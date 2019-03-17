@@ -9,9 +9,8 @@ import android.support.v7.widget.Toolbar;
 
 import hkr.da224a.jobshadow.R;
 import hkr.da224a.jobshadow.fragments.Adapters.ViewPagerAdapter;
-import hkr.da224a.jobshadow.fragments.NotificationsFragment;
-import hkr.da224a.jobshadow.fragments.OfferFragment;
-import hkr.da224a.jobshadow.fragments.SearchFragment;
+import hkr.da224a.jobshadow.fragments.HistoryFragment;
+import hkr.da224a.jobshadow.fragments.UserDetailFragment;
 
 public class StudentProfileActivity extends AppCompatActivity {
 
@@ -71,9 +70,8 @@ public class StudentProfileActivity extends AppCompatActivity {
     private void setupViewPager(ViewPager viewPager) {
         ViewPagerAdapter viewPagerAdapter =
                 new ViewPagerAdapter(getSupportFragmentManager());
-        viewPagerAdapter.addFragment(new NotificationsFragment(), "Notifications");
-        viewPagerAdapter.addFragment(new OfferFragment(), "Offers");
-        viewPagerAdapter.addFragment(new SearchFragment(), "History");
+        viewPagerAdapter.addFragment(new UserDetailFragment(), "Details");
+        viewPagerAdapter.addFragment(new HistoryFragment(), "History");
         viewPager.setAdapter(viewPagerAdapter);
     }
 }

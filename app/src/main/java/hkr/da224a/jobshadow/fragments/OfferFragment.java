@@ -17,7 +17,7 @@ import java.sql.Timestamp;
 import java.util.ArrayList;
 
 import hkr.da224a.jobshadow.R;
-import hkr.da224a.jobshadow.activities.offer_activities.OfferListAdapter;
+import hkr.da224a.jobshadow.fragments.Adapters.OfferListAdapter;
 import hkr.da224a.jobshadow.activities.student_activities.StudentMainActivity;
 import hkr.da224a.jobshadow.model.Offer;
 import hkr.da224a.jobshadow.utils.SQLiteDatabaseHelper;

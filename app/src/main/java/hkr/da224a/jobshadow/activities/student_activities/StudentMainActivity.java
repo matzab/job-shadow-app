@@ -44,6 +44,7 @@ public class StudentMainActivity extends AppCompatActivity
 
 
         viewPager = (NoSwipeViewPager) findViewById(R.id.main_menu_holder);
+        setupViewPager(viewPager);
         viewPager.setPagingEnabled(false);
         viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
@@ -97,7 +98,6 @@ public class StudentMainActivity extends AppCompatActivity
                 return false;
             }
         });
-        setupViewPager(viewPager);
     }
 
 
