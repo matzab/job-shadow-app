@@ -15,7 +15,7 @@ import android.view.ViewGroup;
 import java.sql.Timestamp;
 
 import hkr.da224a.jobshadow.R;
-import hkr.da224a.jobshadow.activities.offer_activities.OfferListAdapter;
+import hkr.da224a.jobshadow.fragments.Adapters.OfferListAdapter;
 import hkr.da224a.jobshadow.activities.student_activities.StudentMainActivity;
 import hkr.da224a.jobshadow.model.Offer;
 

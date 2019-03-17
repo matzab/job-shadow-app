@@ -5,6 +5,8 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
@@ -16,11 +18,13 @@ import android.view.ViewGroup;
 
 import hkr.da224a.jobshadow.R;
 import hkr.da224a.jobshadow.activities.student_activities.StudentMainActivity;
+import hkr.da224a.jobshadow.fragments.Adapters.RecentSearchListAdapter;
 
 /**
  * A simple {@link Fragment} subclass.
  */
 public class SearchFragment extends Fragment {
+    private String[] tmpData = {"String 1", "String 2", "String 3", "String 4", "String 5"};
 
 
     public SearchFragment() {
@@ -33,8 +37,8 @@ public class SearchFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         setHasOptionsMenu(true);
-        Toolbar searchToolbar =  getActivity().findViewById(R.id.toolbar);
-        ((StudentMainActivity)getActivity()).setToolbar(searchToolbar);
+        Toolbar searchToolbar = getActivity().findViewById(R.id.toolbar);
+        ((StudentMainActivity) getActivity()).setToolbar(searchToolbar);
         return inflater.inflate(R.layout.fragment_search, container, false);
     }
 
@@ -42,7 +46,12 @@ public class SearchFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-
+        RecyclerView recyclerView = (RecyclerView) getActivity().findViewById(R.id.recent_search_view);
+        recyclerView.setHasFixedSize(true);
+        LinearLayoutManager layoutManager = new LinearLayoutManager(this.getActivity());
+        recyclerView.setLayoutManager(layoutManager);
+        RecyclerView.Adapter mAdapter = new RecentSearchListAdapter(this.getActivity(), tmpData);
+        recyclerView.setAdapter(mAdapter);
     }
 
     @Override
@@ -67,7 +76,7 @@ public class SearchFragment extends Fragment {
         });
 
         super.onCreateOptionsMenu(menu, inflater);
-    }
 
+    }
 
 }
