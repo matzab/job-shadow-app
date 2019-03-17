@@ -22,7 +22,7 @@ import java.util.ArrayList;
 import hkr.da224a.jobshadow.R;
 import hkr.da224a.jobshadow.activities.LoginActivity;
 import hkr.da224a.jobshadow.activities.offer_activities.OfferEditActivity;
-import hkr.da224a.jobshadow.activities.offer_activities.OfferListAdapter;
+import hkr.da224a.jobshadow.fragments.Adapters.OfferListAdapter;
 import hkr.da224a.jobshadow.model.Business;
 import hkr.da224a.jobshadow.model.Offer;
 import hkr.da224a.jobshadow.utils.SQLiteDatabaseHelper;
