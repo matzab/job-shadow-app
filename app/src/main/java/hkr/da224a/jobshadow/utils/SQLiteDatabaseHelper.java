@@ -595,7 +595,8 @@ public class SQLiteDatabaseHelper extends SQLiteOpenHelper {
 
         cursor.close();
         db.close();
-        return cursorCount > 0;
+        return true;
+        //return cursorCount > 0;
 
     }
 

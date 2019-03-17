@@ -13,6 +13,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_margin="20dp"
             android:fadingEdge="none"
             android:orientation="vertical">
 
@@ -130,7 +131,7 @@
                 android:background="?android:attr/listDivider" />
 
             <Button
-                android:id="@+id/apply_button"
+                android:id="@+id/button"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"

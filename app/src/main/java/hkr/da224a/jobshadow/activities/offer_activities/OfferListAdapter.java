@@ -10,17 +10,21 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import java.util.ArrayList;
+
 import hkr.da224a.jobshadow.R;
 import hkr.da224a.jobshadow.model.Offer;
 
 
 public class OfferListAdapter extends RecyclerView.Adapter<OfferListAdapter.MyViewHolder> {
-    private Offer[] mDataset;
+    private ArrayList<Offer> mDataset;
     private Context mContext;
+    private String mOrigin;
 
-    public OfferListAdapter(Context context, Offer[] myDataset) {
+    public OfferListAdapter(Context context, ArrayList<Offer> myDataset, String origin) {
         mDataset = myDataset;
         mContext = context;
+        mOrigin = origin;
     }
 
     @Override
@@ -35,15 +39,16 @@ public class OfferListAdapter extends RecyclerView.Adapter<OfferListAdapter.MyVi
     @Override
     public void onBindViewHolder(MyViewHolder holder, final int position) {
 
-        holder.setOfferTitle(mDataset[position].getOfferTitle());
-        holder.setOfferCompany("OFFER COMPANY");
-        holder.setOfferLocation(mDataset[position].getOfferLocation());
+        holder.setOfferTitle(mDataset.get(position).getOfferTitle());
+        holder.setOfferLength(mDataset.get(position).getOfferLength());
+        holder.setOfferLocation(mDataset.get(position).getOfferLocation());
 
         holder.linearLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent =  new Intent(mContext, OfferDetailActivity.class);
-                intent.putExtra("selected_offer", mDataset[position]);
+                intent.putExtra("selected_offer", mDataset.get(position));
+                intent.putExtra("origin",mOrigin);
                 mContext.startActivity(intent);
             }
         });
@@ -54,7 +59,7 @@ public class OfferListAdapter extends RecyclerView.Adapter<OfferListAdapter.MyVi
 
         public LinearLayout linearLayout;
         public TextView offerTitle;
-        public TextView offerCompany;
+        public TextView offerLength;
         public TextView offerLocation;
 
         public MyViewHolder(LinearLayout l) {
@@ -62,15 +67,15 @@ public class OfferListAdapter extends RecyclerView.Adapter<OfferListAdapter.MyVi
             linearLayout = l;
 
             offerTitle = l.findViewById(R.id.offer_title);
-            offerCompany = l.findViewById(R.id.offer_company);
+            offerLength = l.findViewById(R.id.offer_length);
             offerLocation = l.findViewById(R.id.offer_location);
         }
 
         public void setOfferTitle(String title) {
             offerTitle.setText(title);
         }
-        public void setOfferCompany(String company) {
-            offerCompany.setText(company);
+        public void setOfferLength(String length) {
+            offerLength.setText(length);
         }
         public void setOfferLocation(String location) {
             offerLocation.setText(location);
@@ -79,6 +84,6 @@ public class OfferListAdapter extends RecyclerView.Adapter<OfferListAdapter.MyVi
 
     @Override
     public int getItemCount() {
-        return mDataset.length;
+        return mDataset.size();
     }
 }

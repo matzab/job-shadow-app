@@ -16,7 +16,7 @@
         android:textStyle="bold"></TextView>
 
     <TextView
-        android:id="@+id/offer_company"
+        android:id="@+id/offer_length"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textColor="#808080"

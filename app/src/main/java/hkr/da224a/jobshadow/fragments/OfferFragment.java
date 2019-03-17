@@ -1,6 +1,7 @@
 package hkr.da224a.jobshadow.fragments;
 
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -13,27 +14,25 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import java.sql.Timestamp;
+import java.util.ArrayList;
 
 import hkr.da224a.jobshadow.R;
 import hkr.da224a.jobshadow.activities.offer_activities.OfferListAdapter;
 import hkr.da224a.jobshadow.activities.student_activities.StudentMainActivity;
 import hkr.da224a.jobshadow.model.Offer;
+import hkr.da224a.jobshadow.utils.SQLiteDatabaseHelper;
 
 /**
  * A simple {@link Fragment} subclass.
  */
 public class OfferFragment extends Fragment {
 
-    private Offer[] temporaryData =
-            {new Offer(1, 1, 1, "Senior Software Engineer", "March 15 - April 7", "5 years of experience in the field of software engineering"
-                    , "Kristianstad", "You will join our Senior Software Engineer who is currently working on a new product concerning fridge software.", new Timestamp(1)),
-                    new Offer(2, 1, 1, "Java Developer", "March 15 - April 7", "1 year of experience with Java"
-                            , "Kristianstad", "You will join our Java Developer who is currently working on managing one of our Java systems.", new Timestamp(1))};
+
+
 
     public OfferFragment() {
         // Required empty public constructor
     }
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -48,11 +47,15 @@ public class OfferFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        SQLiteDatabaseHelper sqLiteDatabaseHelper = new SQLiteDatabaseHelper(this.getContext());
+        ArrayList<Offer> temporaryData = sqLiteDatabaseHelper.getAllOffers();
+
         RecyclerView recyclerView = (RecyclerView) getActivity().findViewById(R.id.offer_view);
         recyclerView.setHasFixedSize(true);
         LinearLayoutManager layoutManager = new LinearLayoutManager(this.getActivity());
         recyclerView.setLayoutManager(layoutManager);
-        RecyclerView.Adapter mAdapter = new OfferListAdapter(this.getActivity(), temporaryData);
+        System.out.println(temporaryData);
+        RecyclerView.Adapter mAdapter = new OfferListAdapter(this.getActivity(), temporaryData, "student");
         recyclerView.setAdapter(mAdapter);
     }
 }
