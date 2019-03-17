@@ -44,6 +44,8 @@ public class StudentMainActivity extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        setToolbar(toolbar,"Home");
+
         viewPager = (NoSwipeViewPager) findViewById(R.id.main_menu_holder);
         viewPager.setPagingEnabled(false);
         viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
@@ -79,11 +81,7 @@ public class StudentMainActivity extends AppCompatActivity
         setupViewPager(viewPager);
 
 
-        drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-        drawer.addDrawerListener(toggle);
-        toggle.syncState();
+
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
@@ -172,29 +170,6 @@ public class StudentMainActivity extends AppCompatActivity
         return true;
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.search_menu, menu);
-
-        MenuItem mSearch = menu.findItem(R.id.action_search);
-
-        SearchView mSearchView = (SearchView) mSearch.getActionView();
-        mSearchView.setQueryHint("Search");
-
-        mSearchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-            @Override
-            public boolean onQueryTextSubmit(String query) {
-                return false;
-            }
-
-            @Override
-            public boolean onQueryTextChange(String newText) {
-                return false;
-            }
-        });
-
-        return super.onCreateOptionsMenu(menu);
-    }
 
     private void setupViewPager(NoSwipeViewPager viewPager) {
         ViewPagerAdapter viewPagerAdapter =
@@ -203,5 +178,20 @@ public class StudentMainActivity extends AppCompatActivity
         viewPagerAdapter.addFragment(new SearchFragment(), "Search");
         viewPagerAdapter.addFragment(new NotificationsFragment(), "Notifications");
         viewPager.setAdapter(viewPagerAdapter);
+    }
+
+    public void setToolbar(Toolbar toolbar, String title){
+        AppCompatActivity actionBar = this;
+        actionBar.setSupportActionBar(toolbar);
+
+        drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
+                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+        drawer.addDrawerListener(toggle);
+        toggle.setDrawerIndicatorEnabled(true);
+        toggle.syncState();
+
+        if(toolbar != null)
+            toolbar.setTitle(title);
     }
 }

@@ -31,8 +31,8 @@ public class OfferDetailActivity extends AppCompatActivity {
         offerLocation.setText(offer.getOfferLocation());
         offerDescription.setText(offer.getDescription());
 
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setDisplayShowHomeEnabled(true);
+//        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+//        getSupportActionBar().setDisplayShowHomeEnabled(true);
 
     }
 
