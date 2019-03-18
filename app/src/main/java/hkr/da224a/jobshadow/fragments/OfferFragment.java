@@ -27,6 +27,7 @@ import hkr.da224a.jobshadow.utils.SQLiteDatabaseHelper;
  */
 public class OfferFragment extends Fragment {
 
+    private int studentID;
 
 
 
@@ -40,6 +41,9 @@ public class OfferFragment extends Fragment {
         // Inflate the layout for this fragment
         Toolbar offerToolbar =  getActivity().findViewById(R.id.toolbar);
         ((StudentMainActivity)getActivity()).setToolbar(offerToolbar);
+
+        studentID =((StudentMainActivity) getActivity()).userID;
+
         return inflater.inflate(R.layout.fragment_offer, container, false);
     }
 
@@ -55,7 +59,7 @@ public class OfferFragment extends Fragment {
         LinearLayoutManager layoutManager = new LinearLayoutManager(this.getActivity());
         recyclerView.setLayoutManager(layoutManager);
         System.out.println(temporaryData);
-        RecyclerView.Adapter mAdapter = new OfferListAdapter(this.getActivity(), temporaryData, "student");
+        RecyclerView.Adapter mAdapter = new OfferListAdapter(this.getActivity(), temporaryData, "student", studentID);
         recyclerView.setAdapter(mAdapter);
     }
 }
