@@ -103,7 +103,7 @@
                 <provider editor-type-id="android-designer2" />
                 <provider selected="true" editor-type-id="text-editor">
                   <state relative-caret-position="120">
-                    <caret line="8" column="7" selection-start-line="8" selection-start-column="7" selection-end-line="8" selection-end-column="7" />
+                    <caret line="8" column="7" lean-forward="true" selection-start-line="8" selection-start-column="7" selection-end-line="8" selection-end-column="7" />
                   </state>
                 </provider>
               </entry>
@@ -175,14 +175,14 @@
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="java" value="718" />
+          <entry key="java" value="742" />
           <entry key="txt" value="81" />
           <entry key="xml" value="146" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="JAVA" value="718" />
+          <entry key="JAVA" value="742" />
           <entry key="PLAIN_TEXT" value="81" />
           <entry key="XML" value="146" />
         </counts>
@@ -248,8 +248,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/hkr/da224a/jobshadow/fragments/Adapters/RecentSearchListAdapter.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="222">
-              <caret line="29" selection-start-line="29" selection-end-line="29" />
+            <state relative-caret-position="390">
+              <caret line="39" column="10" lean-forward="true" selection-start-line="39" selection-start-column="10" selection-end-line="39" selection-end-column="10" />
               <folding>
                 <element signature="e#1452#1453#0" expanded="true" />
                 <element signature="e#1497#1498#0" expanded="true" />
@@ -2704,8 +2704,8 @@
         <option value="$PROJECT_DIR$/app/src/main/java/hkr/da224a/jobshadow/fragments/Adapters/ChildDataItem.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/hkr/da224a/jobshadow/fragments/Adapters/ParentDataItem.java" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/search_list_item.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/java/hkr/da224a/jobshadow/fragments/Adapters/RecentSearchListAdapter.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/hkr/da224a/jobshadow/fragments/SearchFragment.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/hkr/da224a/jobshadow/fragments/Adapters/RecentSearchListAdapter.java" />
       </list>
     </option>
   </component>
@@ -2746,14 +2746,6 @@
               <item name="java" type="edd41e36:AndroidSourceTypeNode" />
               <item name="jobshadow" type="cbb59c9e:AndroidPsiDirectoryNode" />
               <item name="fragments" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="job-shadow-app" type="1abcf292:AndroidViewProjectNode" />
-              <item name="app" type="feadf853:AndroidModuleNode" />
-              <item name="java" type="edd41e36:AndroidSourceTypeNode" />
-              <item name="jobshadow" type="cbb59c9e:AndroidPsiDirectoryNode" />
-              <item name="fragments" type="462c0819:PsiDirectoryNode" />
-              <item name="Adapters" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="job-shadow-app" type="1abcf292:AndroidViewProjectNode" />
@@ -2992,7 +2984,6 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="1975" y="25" width="1338" height="1055" extended-state="4" />
-    <editor active="true" />
     <layout>
       <window_info id="Captures" order="0" side_tool="true" weight="0.25" />
       <window_info id="Capture Tool" order="1" />
@@ -3006,11 +2997,11 @@
       <window_info anchor="bottom" id="TODO" order="1" />
       <window_info anchor="bottom" id="Android Profiler" order="2" />
       <window_info anchor="bottom" id="Debug" order="3" />
-      <window_info active="true" anchor="bottom" id="Run" order="4" visible="true" weight="0.22162162" />
+      <window_info anchor="bottom" id="Run" order="4" weight="0.22162162" />
       <window_info anchor="bottom" id="Event Log" order="5" side_tool="true" />
       <window_info anchor="bottom" id="Version Control" order="6" />
       <window_info anchor="bottom" id="Build" order="7" weight="0.32936078" />
-      <window_info anchor="bottom" id="Terminal" order="8" weight="0.32956153" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="8" visible="true" weight="0.32864866" />
       <window_info anchor="right" id="Preview" />
       <window_info anchor="right" id="Device File Explorer" order="0" side_tool="true" />
       <window_info anchor="right" id="Capture Analysis" order="1" />
@@ -3154,14 +3145,6 @@
       <provider editor-type-id="android-designer2" />
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/menu/save_menu_option.xml">
-      <provider editor-type-id="android-designer2" />
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="120">
-          <caret line="8" column="7" selection-start-line="8" selection-start-column="7" selection-end-line="8" selection-end-column="7" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/hkr/da224a/jobshadow/activities/ChangePasswordActivity.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-15">
@@ -3235,10 +3218,18 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/menu/save_menu_option.xml">
+      <provider editor-type-id="android-designer2" />
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="120">
+          <caret line="8" column="7" lean-forward="true" selection-start-line="8" selection-start-column="7" selection-end-line="8" selection-end-column="7" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/hkr/da224a/jobshadow/fragments/Adapters/RecentSearchListAdapter.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="222">
-          <caret line="29" selection-start-line="29" selection-end-line="29" />
+        <state relative-caret-position="390">
+          <caret line="39" column="10" lean-forward="true" selection-start-line="39" selection-start-column="10" selection-end-line="39" selection-end-column="10" />
           <folding>
             <element signature="e#1452#1453#0" expanded="true" />
             <element signature="e#1497#1498#0" expanded="true" />
