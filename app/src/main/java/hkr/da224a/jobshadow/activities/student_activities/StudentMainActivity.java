@@ -19,6 +19,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.facebook.login.LoginManager;
+import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.Stack;
 
@@ -150,6 +151,7 @@ public class StudentMainActivity extends AppCompatActivity
                 StudentMainActivity.this.startActivity(intent);
                 break;
             case R.id.nav_logout:
+                FirebaseAuth.getInstance().signOut();
                 LoginManager.getInstance().logOut();
                 intent = new Intent(StudentMainActivity.this, LoginActivity.class);
                 StudentMainActivity.this.startActivity(intent);
