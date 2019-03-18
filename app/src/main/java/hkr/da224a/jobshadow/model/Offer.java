@@ -248,6 +248,11 @@ public class Offer implements Parcelable {
         dest.writeString(offerPositionQuals);
         dest.writeString(offerLocation);
         dest.writeString(description);
+        if(dateCreated != null){
+            dest.writeString(dateCreated.toString());
+        }else{
+            dest.writeString("");
+        }
     }
 
     // this is used to regenerate your object. All Parcelables must have a CREATOR that implements these two methods
@@ -270,5 +275,11 @@ public class Offer implements Parcelable {
         offerPositionQuals = in.readString();
         offerLocation = in.readString();
         description = in.readString();
+        String temp = in.readString();
+        if(temp.equals("")){
+            dateCreated = null;
+        }else{
+            dateCreated = Timestamp.valueOf(temp);
+        }
     }
 }

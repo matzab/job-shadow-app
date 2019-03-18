@@ -65,7 +65,6 @@ public class BusinessMainActivity extends AppCompatActivity
         final int ID2 = ID;
 
 
-        //SQLiteDatabaseHelper sqLiteDatabaseHelper = new SQLiteDatabaseHelper(this.getContext());
         ArrayList<Offer> offerList = sqLiteDatabaseHelper.getAllOffers();
         for(int i = 0; i < offerList.size(); i++){
             if(offerList.get(i).getBusinessID() != ID2){
@@ -77,7 +76,6 @@ public class BusinessMainActivity extends AppCompatActivity
         recyclerView.setHasFixedSize(true);
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
-        System.out.println(offerList);
         RecyclerView.Adapter mAdapter = new OfferListAdapter(this, offerList, "business");
         recyclerView.setAdapter(mAdapter);
 
@@ -87,15 +85,43 @@ public class BusinessMainActivity extends AppCompatActivity
             public void onClick(View v) {
                 Intent intent = new Intent(BusinessMainActivity.this, OfferEditActivity.class);
                 intent.putExtra("ID",ID2);
+                intent.putExtra("origin","create");
                 intent.putExtra("current_offer", new Offer());
                 BusinessMainActivity.this.startActivity(intent);
             }
         });
+    }
+
+    @Override
+    protected void onResume(){
+        super.onResume();
+        Intent intent = getIntent();
+        String email = intent.getStringExtra("email_of_user");
+        int ID = 0;
+
+        SQLiteDatabaseHelper sqLiteDatabaseHelper = new SQLiteDatabaseHelper(this);
+        ArrayList<Business> businessList = sqLiteDatabaseHelper.getAllBusinesses();
+        for(int i = 0; i < businessList.size(); i++){
+            if(businessList.get(i).getContactEmail().equals(email)){
+                ID = businessList.get(i).getBusinessID();
+            }
+        }
+        final int ID2 = ID;
 
 
+        ArrayList<Offer> offerList = sqLiteDatabaseHelper.getAllOffers();
+        for(int i = 0; i < offerList.size(); i++){
+            if(offerList.get(i).getBusinessID() != ID2){
+                offerList.remove(i);
+            }
+        }
 
-
-
+        RecyclerView recyclerView = (RecyclerView) findViewById(R.id.offer_view);
+        recyclerView.setHasFixedSize(true);
+        LinearLayoutManager layoutManager = new LinearLayoutManager(this);
+        recyclerView.setLayoutManager(layoutManager);
+        RecyclerView.Adapter mAdapter = new OfferListAdapter(this, offerList, "business");
+        recyclerView.setAdapter(mAdapter);
     }
 
     @Override

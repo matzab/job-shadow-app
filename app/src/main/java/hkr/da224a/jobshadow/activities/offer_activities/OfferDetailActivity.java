@@ -17,7 +17,7 @@ public class OfferDetailActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        System.out.println(getIntent().getStringExtra("origin"));
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_offer_detail);
 //        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -52,8 +52,10 @@ public class OfferDetailActivity extends AppCompatActivity {
                 public void onClick(View v) {
                     Toast.makeText(OfferDetailActivity.this, "Please edit your offer.", Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent(OfferDetailActivity.this, OfferEditActivity.class);
+                    intent.putExtra("origin","edit");
                     intent.putExtra("current_offer",offer);
                     OfferDetailActivity.this.startActivity(intent);
+                    finish();
                 }
             });
         }
