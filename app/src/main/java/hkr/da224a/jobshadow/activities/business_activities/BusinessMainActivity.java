@@ -17,6 +17,9 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Button;
 
+import com.facebook.login.LoginManager;
+import com.google.firebase.auth.FirebaseAuth;
+
 import java.util.ArrayList;
 
 import hkr.da224a.jobshadow.R;
@@ -142,6 +145,7 @@ public class BusinessMainActivity extends AppCompatActivity
             BusinessMainActivity.this.startActivity(intent);
 
         } else if (id == R.id.nav_logout) {
+            FirebaseAuth.getInstance().signOut();
             Intent intent = new Intent(BusinessMainActivity.this, LoginActivity.class);
             BusinessMainActivity.this.startActivity(intent);
             finish();

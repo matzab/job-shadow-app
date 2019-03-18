@@ -18,6 +18,9 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.facebook.login.LoginManager;
+import com.google.firebase.auth.FirebaseAuth;
+
 import java.util.Stack;
 
 import hkr.da224a.jobshadow.NoSwipeViewPager;
@@ -41,7 +44,6 @@ public class StudentMainActivity extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_student_main);
-
 
         viewPager = (NoSwipeViewPager) findViewById(R.id.main_menu_holder);
         setupViewPager(viewPager);
@@ -149,6 +151,8 @@ public class StudentMainActivity extends AppCompatActivity
                 StudentMainActivity.this.startActivity(intent);
                 break;
             case R.id.nav_logout:
+                FirebaseAuth.getInstance().signOut();
+                LoginManager.getInstance().logOut();
                 intent = new Intent(StudentMainActivity.this, LoginActivity.class);
                 StudentMainActivity.this.startActivity(intent);
                 finish();
