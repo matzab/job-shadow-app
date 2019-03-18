@@ -64,11 +64,13 @@ public class BusinessMainActivity extends AppCompatActivity
         }
         final int ID2 = ID;
 
+        ArrayList<Offer> thisOfferList = new ArrayList<>();
 
         ArrayList<Offer> offerList = sqLiteDatabaseHelper.getAllOffers();
+
         for(int i = 0; i < offerList.size(); i++){
             if(offerList.get(i).getBusinessID() != ID2){
-                offerList.remove(i);
+                thisOfferList.add(offerList.get(i));
             }
         }
 
@@ -76,7 +78,7 @@ public class BusinessMainActivity extends AppCompatActivity
         recyclerView.setHasFixedSize(true);
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
-        RecyclerView.Adapter mAdapter = new OfferListAdapter(this, offerList, "business");
+        RecyclerView.Adapter mAdapter = new OfferListAdapter(this, thisOfferList, "business");
         recyclerView.setAdapter(mAdapter);
 
         Button createButton = (Button) findViewById(R.id.create_button);

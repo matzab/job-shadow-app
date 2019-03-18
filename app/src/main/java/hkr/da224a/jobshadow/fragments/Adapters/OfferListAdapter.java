@@ -20,11 +20,19 @@ public class OfferListAdapter extends RecyclerView.Adapter<OfferListAdapter.MyVi
     private ArrayList<Offer> mDataset;
     private Context mContext;
     private String mOrigin;
+    private int mStudentID;
 
     public OfferListAdapter(Context context, ArrayList<Offer> myDataset, String origin) {
         mDataset = myDataset;
         mContext = context;
         mOrigin = origin;
+    }
+
+    public OfferListAdapter(Context context, ArrayList<Offer> myDataset, String origin, int studentID) {
+        mDataset = myDataset;
+        mContext = context;
+        mOrigin = origin;
+        mStudentID = studentID;
     }
 
     @Override
@@ -49,6 +57,7 @@ public class OfferListAdapter extends RecyclerView.Adapter<OfferListAdapter.MyVi
                 Intent intent =  new Intent(mContext, OfferDetailActivity.class);
                 intent.putExtra("selected_offer", mDataset.get(position));
                 intent.putExtra("origin",mOrigin);
+                intent.putExtra("studentID",mStudentID);
                 mContext.startActivity(intent);
             }
         });

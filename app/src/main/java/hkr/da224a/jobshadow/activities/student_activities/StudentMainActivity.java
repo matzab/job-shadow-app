@@ -21,15 +21,20 @@ import android.view.MenuItem;
 import com.facebook.login.LoginManager;
 import com.google.firebase.auth.FirebaseAuth;
 
+import java.util.ArrayList;
 import java.util.Stack;
 
 import hkr.da224a.jobshadow.NoSwipeViewPager;
 import hkr.da224a.jobshadow.R;
 import hkr.da224a.jobshadow.activities.LoginActivity;
+import hkr.da224a.jobshadow.activities.MyApplicationsActivity;
+import hkr.da224a.jobshadow.activities.offer_activities.OfferApplicationsActivity;
 import hkr.da224a.jobshadow.fragments.Adapters.ViewPagerAdapter;
 import hkr.da224a.jobshadow.fragments.NotificationsFragment;
 import hkr.da224a.jobshadow.fragments.OfferFragment;
 import hkr.da224a.jobshadow.fragments.SearchFragment;
+import hkr.da224a.jobshadow.model.Student;
+import hkr.da224a.jobshadow.utils.SQLiteDatabaseHelper;
 
 public class StudentMainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -39,11 +44,25 @@ public class StudentMainActivity extends AppCompatActivity
     private BottomNavigationView bottomNav;
     private NoSwipeViewPager viewPager;
 
+    public int userID;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_student_main);
+
+        Intent intent = getIntent();
+        String email = intent.getStringExtra("email_of_user");
+        int ID = 0;
+
+        SQLiteDatabaseHelper sqLiteDatabaseHelper = new SQLiteDatabaseHelper(this);
+        ArrayList<Student> studentList = sqLiteDatabaseHelper.getAllStudents();
+        for(int i = 0; i < studentList.size(); i++){
+            if(studentList.get(i).getEmailAddress().equals(email)){
+                ID = studentList.get(i).getStudentID();
+            }
+        }
+        userID = ID;
 
         viewPager = (NoSwipeViewPager) findViewById(R.id.main_menu_holder);
         setupViewPager(viewPager);
@@ -53,7 +72,6 @@ public class StudentMainActivity extends AppCompatActivity
             public void onPageScrolled(int i, float v, int i1) {
 
             }
-
             @Override
             public void onPageSelected(int i) {
                 int currentItem = viewPager.getCurrentItem();
@@ -158,6 +176,9 @@ public class StudentMainActivity extends AppCompatActivity
                 finish();
                 break;
             case R.id.nav_applications:
+                intent = new Intent(StudentMainActivity.this, MyApplicationsActivity.class);
+                intent.putExtra("userID",userID);
+                StudentMainActivity.this.startActivity(intent);
                 break;
         }
 

@@ -478,6 +478,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                     LoginActivity.this.startActivity(intent);
                 } else if (mRole.equals(Student.getAccountType())) {
                     Intent intent = new Intent(LoginActivity.this, StudentMainActivity.class);
+                    intent.putExtra("email_of_user", mEmail);
                     LoginActivity.this.startActivity(intent);
                 }
                 Toast.makeText(LoginActivity.this, "Login Successful", Toast.LENGTH_SHORT).show();
