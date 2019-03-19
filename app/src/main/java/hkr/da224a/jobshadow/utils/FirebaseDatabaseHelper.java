@@ -59,33 +59,44 @@ public class FirebaseDatabaseHelper {
      * @return the boolean
      */
     public static boolean createNewStudentAccount(final Student student) {
-        final boolean[] isAdded = {false};
-        final CountDownLatch done = new CountDownLatch(1);
         firebaseAuth.createUserWithEmailAndPassword(student.getEmailAddress(), student.getPassword())
                 .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
-                            done.countDown();
-                            studentEndPoint.child(Integer.toString(student.getStudentID())).setValue(student).addOnCompleteListener(new OnCompleteListener<Void>() {
+                            Log.e(TAG, "Auth Created");
+                            studentEndPoint.child(Integer.toString(student.getStudentID())).
+                                    setValue(student).addOnCompleteListener(new OnCompleteListener<Void>() {
                                 @Override
                                 public void onComplete(@NonNull Task<Void> task) {
-                                    if (task.isSuccessful())
-                                        isAdded[0] = true;
-                                    else {
+                                    if (task.isSuccessful()) {
+                                        Log.e(TAG, "Database entry created");
+                                    } else {
+                                        Log.e(TAG, task.getException().toString());
                                         Objects.requireNonNull(firebaseAuth.getCurrentUser()).delete();
                                     }
                                 }
                             });
-                        }
+                        } else Log.e(TAG, task.getException().toString());
                     }
                 });
-        try {
-            done.await(); //it will wait till the response is received from firebase.
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        return isAdded[0];
+
+        return true;
+    }
+
+    public static boolean deleteStudent(final Student student) {
+        studentEndPoint.child(Integer.toString(student.getStudentID()))
+                .removeValue().addOnCompleteListener(new OnCompleteListener<Void>() {
+            @Override
+            public void onComplete(@NonNull Task<Void> task) {
+                if (task.isSuccessful()) {
+                    Log.e(TAG, "Child deleted Successfully");
+                } else {
+                    Log.e(TAG, "Error Deleting child");
+                }
+            }
+        });
+        return true;
     }
 
     /**
@@ -96,13 +107,11 @@ public class FirebaseDatabaseHelper {
      */
     public static boolean createNewBusiness(final Business business) {
         final boolean[] isAdded = {false};
-        final CountDownLatch done = new CountDownLatch(1);
         firebaseAuth.createUserWithEmailAndPassword(business.getContactEmail(), business.getPassword())
                 .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
-                            done.countDown();
                             businessEndPoint.child(Integer.toString(business.getBusinessID())).setValue(business).addOnCompleteListener(new OnCompleteListener<Void>() {
                                 @Override
                                 public void onComplete(@NonNull Task<Void> task) {
@@ -114,12 +123,22 @@ public class FirebaseDatabaseHelper {
                         }
                     }
                 });
-        try {
-            done.await(); //it will wait till the response is received from firebase.
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        return isAdded[0];
+        return true;
+    }
+
+    public static boolean deleteBusiness(final Business business){
+        businessEndPoint.child(Integer.toString(business.getBusinessID())).removeValue().addOnCompleteListener(new OnCompleteListener<Void>() {
+            @Override
+            public void onComplete(@NonNull Task<Void> task) {
+                if(task.isSuccessful()){
+                    Log.e(TAG, "Business Deleted Successfully");
+                }
+                else {
+                    Log.e(TAG, "Error Occurred");
+                }
+            }
+        });
+        return true;
     }
 
     /**

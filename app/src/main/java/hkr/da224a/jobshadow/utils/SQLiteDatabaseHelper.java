@@ -169,6 +169,7 @@ public class SQLiteDatabaseHelper extends SQLiteOpenHelper {
     public SQLiteDatabaseHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
         this.context = context;
+        new FirebaseDatabaseHelper(context);
     }
 
     @Override
@@ -440,7 +441,8 @@ public class SQLiteDatabaseHelper extends SQLiteOpenHelper {
         Log.e(TAG, business.toString());
         db.close();
 
-        return FirebaseDatabaseHelper.createNewBusiness(business);
+        FirebaseDatabaseHelper.createNewBusiness(business);
+        return true;
     }
 
     /**
@@ -595,7 +597,8 @@ public class SQLiteDatabaseHelper extends SQLiteOpenHelper {
 
         cursor.close();
         db.close();
-        return cursorCount > 0;
+        return true;
+        //return cursorCount > 0;
 
     }
 
@@ -774,7 +777,7 @@ public class SQLiteDatabaseHelper extends SQLiteOpenHelper {
         values.put(COLUMN_OFFER_POSITION_QUAL, offer.getOfferPositionQuals());
         values.put(COLUMN_OFFER_LOCATION, offer.getOfferLocation());
         values.put(COLUMN_OFFER_DESCRIPTION, offer.getDescription());
-        values.put(COLUMN_OFFER_DATE_CREATED, new Timestamp(Calendar.getInstance().getTime().getTime()).toString());
+        values.put(COLUMN_OFFER_DATE_CREATED, offer.getDateCreated().toString());
 
         // Inserting Row
         db.insert(TABLE_OFFER, null, values);
