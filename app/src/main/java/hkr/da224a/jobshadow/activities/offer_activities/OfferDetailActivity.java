@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -125,6 +126,24 @@ public class OfferDetailActivity extends AppCompatActivity {
         }
 
         if(intent.getStringExtra("origin").equals("business")){
+
+            Button myButton = new Button(this);
+            myButton.setText("VIEW APPLICANTS");
+
+            LinearLayout ll = (LinearLayout)findViewById(R.id.linear_layout);
+            LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+            ll.addView(myButton, lp);
+
+            myButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(OfferDetailActivity.this, OfferApplicantsActivity.class);
+                    intent.putExtra("current_offer",offer);
+                    OfferDetailActivity.this.startActivity(intent);
+                }
+            });
+
+
             button.setText("EDIT");
             button.setOnClickListener(new View.OnClickListener() {
                 @Override

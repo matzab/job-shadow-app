@@ -1,6 +1,7 @@
 package hkr.da224a.jobshadow.activities.offer_activities;
 
 import android.content.Intent;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -32,6 +33,8 @@ public class OfferEditActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_offer_edit);
+
+        setupActionBar();
 
         offerTitle = (EditText) findViewById(R.id.offer_title_text);
         offerLocation = (EditText) findViewById(R.id.offer_location_text);
@@ -149,5 +152,21 @@ public class OfferEditActivity extends AppCompatActivity {
                 }
             });
         }
+    }
+
+    private void setupActionBar() {
+        ActionBar actionBar = getSupportActionBar();
+        if (actionBar != null) {
+            // Show the Up button in the action bar.
+            actionBar.setDisplayHomeAsUpEnabled(true);
+            actionBar.setDisplayShowHomeEnabled(true);
+            actionBar.setTitle("Edit your offer");
+        }
+    }
+
+    @Override
+    public boolean onSupportNavigateUp() {
+        onBackPressed();
+        return true;
     }
 }
