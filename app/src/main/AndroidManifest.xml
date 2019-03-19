@@ -30,7 +30,7 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".activities.MyApplicationsActivity" />
         <activity android:name=".activities.ProfileDisplayActivity" />
-        <activity android:name=".activities.offer_activities.OfferApplicationsActivity" />
+        <activity android:name=".activities.offer_activities.OfferApplicantsActivity" />
         <activity android:name=".activities.offer_activities.OfferEditActivity" />
         <activity android:name=".activities.business_activities.BusinessProfileActivity" />
         <activity android:name=".activities.business_activities.BusinessSettingsActivity" />
