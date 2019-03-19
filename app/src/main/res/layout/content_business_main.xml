@@ -14,12 +14,6 @@
         android:layout_margin="20dp"
         android:orientation="vertical">
 
-        <Button
-            android:id="@+id/create_button"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="NEW OFFER" />
-
         <android.support.v7.widget.RecyclerView
             android:id="@+id/offer_view"
             android:layout_width="match_parent"

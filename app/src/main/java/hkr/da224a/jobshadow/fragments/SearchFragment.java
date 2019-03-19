@@ -16,16 +16,18 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
+import java.util.ArrayList;
+
 import hkr.da224a.jobshadow.R;
 import hkr.da224a.jobshadow.activities.student_activities.StudentMainActivity;
+import hkr.da224a.jobshadow.fragments.Adapters.ChildDataItem;
+import hkr.da224a.jobshadow.fragments.Adapters.ParentDataItem;
 import hkr.da224a.jobshadow.fragments.Adapters.RecentSearchListAdapter;
 
 /**
  * A simple {@link Fragment} subclass.
  */
 public class SearchFragment extends Fragment {
-    private String[] tmpData = {"String 1", "String 2", "String 3", "String 4", "String 5"};
-
 
     public SearchFragment() {
         // Required empty public constructor
@@ -46,11 +48,21 @@ public class SearchFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+         ArrayList<ParentDataItem> parentDataItems = new ArrayList<>();
+        ArrayList<ChildDataItem> childDataItems = new ArrayList<>();
+
+        childDataItems.add(new ChildDataItem("String 1"));
+        childDataItems.add(new ChildDataItem("String 2"));
+        childDataItems.add(new ChildDataItem("String 3"));
+        childDataItems.add(new ChildDataItem("String 4"));
+        childDataItems.add(new ChildDataItem("String 5"));
+        parentDataItems.add(new ParentDataItem("Recent searches", childDataItems));
+
         RecyclerView recyclerView = (RecyclerView) getActivity().findViewById(R.id.recent_search_view);
         recyclerView.setHasFixedSize(true);
         LinearLayoutManager layoutManager = new LinearLayoutManager(this.getActivity());
         recyclerView.setLayoutManager(layoutManager);
-        RecyclerView.Adapter mAdapter = new RecentSearchListAdapter(this.getActivity(), tmpData);
+        RecyclerView.Adapter mAdapter = new RecentSearchListAdapter(parentDataItems);
         recyclerView.setAdapter(mAdapter);
     }
 

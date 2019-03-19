@@ -25,6 +25,8 @@ public class OfferEditActivity extends AppCompatActivity {
     EditText offerDescription;
     EditText offerLength;
     EditText offerPositionQuals;
+    Button saveButton;
+    Button cancelDeleteButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,65 +38,116 @@ public class OfferEditActivity extends AppCompatActivity {
         offerDescription = (EditText) findViewById(R.id.offer_description_text);
         offerLength = (EditText) findViewById(R.id.offer_length_text);
         offerPositionQuals = (EditText) findViewById(R.id.offer_position_quals_text);
+        saveButton = (Button) findViewById(R.id.save_button);
+        cancelDeleteButton = (Button) findViewById(R.id.cancel_delete_button);
 
-        Offer offer = getIntent().getParcelableExtra("current_offer");
+        final Offer offer = getIntent().getParcelableExtra("current_offer");
         offerTitle.setText(offer.getOfferTitle());
         offerLocation.setText(offer.getOfferLocation());
         offerDescription.setText(offer.getDescription());
         offerLength.setText(offer.getOfferLength());
         offerPositionQuals.setText(offer.getOfferPositionQuals());
 
-    }
+        final SQLiteDatabaseHelper sqLiteDatabaseHelper = new SQLiteDatabaseHelper(this);
 
-    public void onSaveButtonClick(View v){
+        String origin = getIntent().getStringExtra("origin");
 
-
-
-        if(!offerTitle.getText().toString().equals("") &&
-                !offerLocation.getText().toString().equals("") &&
-                !offerDescription.getText().toString().equals("") &&
-                !offerLength.getText().toString().equals("") &&
-                !offerPositionQuals.getText().toString().equals("")){
-
-
-            System.out.println("Creating new offer");
-
-            Offer offer = new Offer();
-
-            SQLiteDatabaseHelper sqLiteDatabaseHelper = new SQLiteDatabaseHelper(this);
-
-            ArrayList<Offer> offerList = sqLiteDatabaseHelper.getAllOffers();
-            int highest = 0;
-            for(int i = 0; i < offerList.size(); i++){
-                if(offerList.get(i).getOfferID() > highest){
-                    highest = offerList.get(i).getOfferID();
+        if(origin.equals("create")){
+            cancelDeleteButton.setText("CANCEL");
+            cancelDeleteButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Toast.makeText(OfferEditActivity.this, "Offer creation canceled.", Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(OfferEditActivity.this, OfferDetailActivity.class);
+                    intent.putExtra("selected_offer",offer);
+                    intent.putExtra("origin","business");
+                    OfferEditActivity.this.startActivity(intent);
+                    finish();
                 }
-            }
-
-            offer.setOfferID(highest+1);
-            offer.setBusinessID(getIntent().getIntExtra("businessID",0));
-            offer.setOfferTitle(offerTitle.getText().toString());
-            offer.setOfferLocation(offerLocation.getText().toString());
-            offer.setDescription(offerDescription.getText().toString());
-            offer.setOfferLength(offerLength.getText().toString());
-            offer.setOfferPositionQuals(offerPositionQuals.getText().toString());
-            offer.setDateCreated(new Timestamp(new Date().getTime()));
+            });
 
 
-            sqLiteDatabaseHelper.addOffer(offer);
+            saveButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
 
-            FirebaseDatabaseHelper.createNewOffer(offer);
+                    if(!offerTitle.getText().toString().equals("") &&
+                            !offerLocation.getText().toString().equals("") &&
+                            !offerDescription.getText().toString().equals("") &&
+                            !offerLength.getText().toString().equals("") &&
+                            !offerPositionQuals.getText().toString().equals("")){
 
-            Intent intent = new Intent(OfferEditActivity.this, BusinessMainActivity.class);
-            OfferEditActivity.this.startActivity(intent);
-            Toast.makeText(OfferEditActivity.this, "Offer successfully created.", Toast.LENGTH_SHORT).show();
-            finish();
+                        Offer offer = new Offer();
 
+                        ArrayList<Offer> offerList = sqLiteDatabaseHelper.getAllOffers();
+                        int highest = 0;
+                        for(int i = 0; i < offerList.size(); i++){
+                            if(offerList.get(i).getOfferID() > highest){
+                                highest = offerList.get(i).getOfferID();
+                            }
+                        }
 
+                        offer.setOfferID(highest+1);
+                        offer.setBusinessID(getIntent().getIntExtra("businessID",0));
+                        offer.setOfferTitle(offerTitle.getText().toString());
+                        offer.setOfferLocation(offerLocation.getText().toString());
+                        offer.setDescription(offerDescription.getText().toString());
+                        offer.setOfferLength(offerLength.getText().toString());
+                        offer.setOfferPositionQuals(offerPositionQuals.getText().toString());
+                        offer.setDateCreated(new Timestamp(new Date().getTime()));
 
-        }else{
-            Toast.makeText(OfferEditActivity.this, "Please enter all fields.", Toast.LENGTH_SHORT).show();
+                        sqLiteDatabaseHelper.addOffer(offer);
 
+                        Toast.makeText(OfferEditActivity.this, "Offer successfully created.", Toast.LENGTH_SHORT).show();
+                        finish();
+                    }else{
+                        Toast.makeText(OfferEditActivity.this, "Please enter all fields.", Toast.LENGTH_SHORT).show();
+                    }
+                }
+            });
+        }
+
+        if(origin.equals("edit")){
+            cancelDeleteButton.setText("DELETE");
+            cancelDeleteButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    sqLiteDatabaseHelper.deleteOffer(offer);
+                    Toast.makeText(OfferEditActivity.this, "Offer has been deleted.", Toast.LENGTH_SHORT).show();
+                    finish();
+                }
+            });
+
+            saveButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if(!offerTitle.getText().toString().equals("") &&
+                            !offerLocation.getText().toString().equals("") &&
+                            !offerDescription.getText().toString().equals("") &&
+                            !offerLength.getText().toString().equals("") &&
+                            !offerPositionQuals.getText().toString().equals("")){
+
+                        offer.setBusinessID(getIntent().getIntExtra("businessID",0));
+                        offer.setOfferTitle(offerTitle.getText().toString());
+                        offer.setOfferLocation(offerLocation.getText().toString());
+                        offer.setDescription(offerDescription.getText().toString());
+                        offer.setOfferLength(offerLength.getText().toString());
+                        offer.setOfferPositionQuals(offerPositionQuals.getText().toString());
+                        offer.setDateCreated(offer.getDateCreated());
+
+                        sqLiteDatabaseHelper.updateOffer(offer);
+
+                        Toast.makeText(OfferEditActivity.this, "Offer successfully updated.", Toast.LENGTH_SHORT).show();
+                        Intent intent = new Intent(OfferEditActivity.this, OfferDetailActivity.class);
+                        intent.putExtra("selected_offer",offer);
+                        intent.putExtra("origin","business");
+                        OfferEditActivity.this.startActivity(intent);
+                        finish();
+                    }else{
+                        Toast.makeText(OfferEditActivity.this, "Please enter all fields.", Toast.LENGTH_SHORT).show();
+                    }
+                }
+            });
         }
     }
 }

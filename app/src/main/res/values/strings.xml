@@ -125,6 +125,8 @@
     <string name="facebook_app_id">1395993820542471</string>
     <string name="fb_login_protocol_scheme">fb1395993820542471</string>
     <string name="title_activity_student_edit">StudentEditActivity</string>
+    <string name="title_activity_change_password">ChangePasswordActivity</string>
+    <string name="title_activity_business_edit">BusinessEditActivity</string>
 
 
 </resources>
