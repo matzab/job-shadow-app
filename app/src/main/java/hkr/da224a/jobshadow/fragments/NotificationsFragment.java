@@ -7,8 +7,12 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -40,6 +44,7 @@ public class NotificationsFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
+        setHasOptionsMenu(true);
         Toolbar notificationToolbar =  getActivity().findViewById(R.id.toolbar);
         ((StudentMainActivity)getActivity()).setToolbar(notificationToolbar);
 
@@ -65,5 +70,13 @@ public class NotificationsFragment extends Fragment {
         System.out.println(temporaryData);
         RecyclerView.Adapter mAdapter = new NotificationListAdapter(this.getActivity(), temporaryData,"student", studentID);
         recyclerView.setAdapter(mAdapter);
+    }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        inflater.inflate(R.menu.notification_menu, menu);
+
+        super.onCreateOptionsMenu(menu, inflater);
+
     }
 }

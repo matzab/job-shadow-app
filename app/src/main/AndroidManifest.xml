@@ -32,7 +32,9 @@
         <activity android:name=".activities.ProfileDisplayActivity" />
         <activity android:name=".activities.offer_activities.OfferApplicantsActivity" />
         <activity android:name=".activities.offer_activities.OfferEditActivity" />
-        <activity android:name=".activities.business_activities.BusinessProfileActivity" />
+        <activity
+            android:name=".activities.business_activities.BusinessProfileActivity"
+            android:theme="@style/AppTheme.NoActionBar"/>
         <activity android:name=".activities.business_activities.BusinessSettingsActivity" />
         <activity
             android:name=".activities.business_activities.BusinessMainActivity"
