@@ -15,6 +15,10 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -28,6 +32,9 @@ import hkr.da224a.jobshadow.fragments.Adapters.RecentSearchListAdapter;
  * A simple {@link Fragment} subclass.
  */
 public class SearchFragment extends Fragment {
+    ArrayAdapter<String>  mAdapter;
+    ArrayList<ChildDataItem> childDataItems;
+    RecyclerView.Adapter mRecycleAdapter;
 
     public SearchFragment() {
         // Required empty public constructor
@@ -37,11 +44,42 @@ public class SearchFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        View view =  inflater.inflate(R.layout.fragment_search, container, false);
         // Inflate the layout for this fragment
         setHasOptionsMenu(true);
         Toolbar searchToolbar = getActivity().findViewById(R.id.toolbar);
         ((StudentMainActivity) getActivity()).setToolbar(searchToolbar);
-        return inflater.inflate(R.layout.fragment_search, container, false);
+        ArrayList<String>  strings = new ArrayList<>();
+        strings.add("aaaaaaaa");
+        strings.add("bbbbaaaa");
+        strings.add("ccccaaaa");
+        strings.add("aaaacccc");
+        strings.add("aaaabbbb");
+        strings.add("aaaazzzz");
+        strings.add("abcaaaaa");
+        strings.add("aabbaaaa");
+        strings.add("cccaaaaa");
+        strings.add("aaaaaaaa");
+        strings.add("bbbbaaaa");
+        strings.add("ccccaaaa");
+        strings.add("aaaacccc");
+        strings.add("aaaabbbb");
+        strings.add("aaaazzzz");
+        strings.add("abcaaaaa");
+        strings.add("aabbaaaa");
+        strings.add("cccaaaaa");
+
+        mAdapter = new ArrayAdapter(getContext(),android.R.layout.simple_list_item_1, strings);
+        ListView mListView = (ListView) view.findViewById(R.id.result_list);
+        mListView.setAdapter(mAdapter);
+        mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                Toast.makeText(getContext(), adapterView.getItemAtPosition(i).toString(), Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        return view;
     }
 
     @Override
@@ -49,7 +87,9 @@ public class SearchFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
          ArrayList<ParentDataItem> parentDataItems = new ArrayList<>();
-        ArrayList<ChildDataItem> childDataItems = new ArrayList<>();
+        childDataItems = new ArrayList<>();
+
+
 
         childDataItems.add(new ChildDataItem("String 1"));
         childDataItems.add(new ChildDataItem("String 2"));
@@ -62,8 +102,8 @@ public class SearchFragment extends Fragment {
         recyclerView.setHasFixedSize(true);
         LinearLayoutManager layoutManager = new LinearLayoutManager(this.getActivity());
         recyclerView.setLayoutManager(layoutManager);
-        RecyclerView.Adapter mAdapter = new RecentSearchListAdapter(parentDataItems);
-        recyclerView.setAdapter(mAdapter);
+        mRecycleAdapter = new RecentSearchListAdapter(parentDataItems);
+        recyclerView.setAdapter(mRecycleAdapter);
     }
 
     @Override
@@ -83,7 +123,8 @@ public class SearchFragment extends Fragment {
 
             @Override
             public boolean onQueryTextChange(String newText) {
-                return false;
+                mAdapter.getFilter().filter(newText);
+                return true;
             }
         });
 

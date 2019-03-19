@@ -35,8 +35,8 @@ public class RecentSearchListAdapter extends RecyclerView.Adapter<RecentSearchLi
     @Override
     public void onBindViewHolder(MyViewHolder holder, final int position) {
 
-        ParentDataItem dummyParentDataItem = parentDataItems.get(position);
-        holder.textView_parentName.setText(dummyParentDataItem.getParentName());
+        ParentDataItem parentDataItem = parentDataItems.get(position);
+        holder.textView_parentName.setText(parentDataItem.getParentName());
         //
         int noOfChildTextViews = holder.linearLayout_childItems.getChildCount();
         for (int index = 0; index < noOfChildTextViews; index++) {
@@ -44,7 +44,7 @@ public class RecentSearchListAdapter extends RecyclerView.Adapter<RecentSearchLi
             currentTextView.setVisibility(View.VISIBLE);
         }
 
-        int noOfChild = dummyParentDataItem.getChildDataItems().size();
+        int noOfChild = parentDataItem.getChildDataItems().size();
         if (noOfChild < noOfChildTextViews) {
             for (int index = noOfChild; index < noOfChildTextViews; index++) {
                 TextView currentTextView = (TextView) holder.linearLayout_childItems.getChildAt(index);
@@ -53,7 +53,7 @@ public class RecentSearchListAdapter extends RecyclerView.Adapter<RecentSearchLi
         }
         for (int textViewIndex = 0; textViewIndex < noOfChild; textViewIndex++) {
             TextView currentTextView = (TextView) holder.linearLayout_childItems.getChildAt(textViewIndex);
-            currentTextView.setText(dummyParentDataItem.getChildDataItems().get(textViewIndex).getChildName());
+            currentTextView.setText(parentDataItem.getChildDataItems().get(textViewIndex).getChildName());
         }
 
     }
