@@ -3,6 +3,7 @@ package hkr.da224a.jobshadow.fragments.Adapters;
 import android.content.Context;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.SearchView;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,6 +12,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.sql.SQLOutput;
 import java.util.ArrayList;
 
 import hkr.da224a.jobshadow.R;
@@ -18,11 +20,13 @@ import hkr.da224a.jobshadow.R;
 public class RecentSearchListAdapter extends RecyclerView.Adapter<RecentSearchListAdapter.MyViewHolder> {
 
     private ArrayList<ParentDataItem> parentDataItems;
+    private SearchView mSearchView;
 
 
 
-    public RecentSearchListAdapter(ArrayList<ParentDataItem> parentDataItems) {
+    public RecentSearchListAdapter(ArrayList<ParentDataItem> parentDataItems, SearchView searchView) {
         this.parentDataItems = parentDataItems;
+        this.mSearchView = searchView;
     }
 
     @Override
@@ -105,6 +109,7 @@ public class RecentSearchListAdapter extends RecyclerView.Adapter<RecentSearchLi
             } else {
                 TextView textViewClicked = (TextView) view;
                 Toast.makeText(context, "" + textViewClicked.getText().toString(), Toast.LENGTH_SHORT).show();
+                mSearchView.setQuery(((TextView) view).getText(),false);
             }
         }
     }

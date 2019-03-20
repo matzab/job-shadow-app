@@ -14,15 +14,9 @@
       <change beforePath="$PROJECT_DIR$/.gradle/4.10.1/taskHistory/taskHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.10.1/taskHistory/taskHistory.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/4.10.1/taskHistory/taskHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.10.1/taskHistory/taskHistory.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/app.iml" beforeDir="false" afterPath="$PROJECT_DIR$/app/app.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/hkr/da224a/jobshadow/fragments/Adapters/RecentSearchListAdapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/hkr/da224a/jobshadow/fragments/Adapters/RecentSearchListAdapter.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/hkr/da224a/jobshadow/fragments/SearchFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/hkr/da224a/jobshadow/fragments/SearchFragment.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_offer_detail.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_offer_detail.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_offer_edit.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_offer_edit.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/search_result_display.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/search_result_display.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/values/colors.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/values/colors.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/values/styles.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/values/styles.xml" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -47,32 +41,33 @@
       <usages-collector id="statistics.lifecycle.project">
         <counts>
           <entry key="project.open.time.1" value="1" />
+          <entry key="project.open.time.49" value="1" />
           <entry key="project.open.time.68" value="1" />
-          <entry key="project.opened" value="2" />
+          <entry key="project.opened" value="3" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
         <counts>
-          <entry key="java" value="21" />
+          <entry key="java" value="22" />
           <entry key="xml" value="54" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
-          <entry key="JAVA" value="21" />
+          <entry key="JAVA" value="22" />
           <entry key="XML" value="54" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="java" value="1128" />
+          <entry key="java" value="1601" />
           <entry key="txt" value="137" />
           <entry key="xml" value="662" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="JAVA" value="1128" />
+          <entry key="JAVA" value="1601" />
           <entry key="PLAIN_TEXT" value="137" />
           <entry key="XML" value="662" />
         </counts>
@@ -121,7 +116,7 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/res/values/styles.xml">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="225">
@@ -139,25 +134,24 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/hkr/da224a/jobshadow/fragments/SearchFragment.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="450">
-              <caret line="161" column="56" selection-start-line="161" selection-start-column="56" selection-end-line="161" selection-end-column="56" />
-              <folding>
-                <element signature="e#3067#3566#0" expanded="true" />
-                <element signature="e#3565#3566#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="297">
+              <caret line="122" column="55" selection-start-line="122" selection-start-column="55" selection-end-line="122" selection-end-column="55" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/AndroidManifest.xml">
-          <provider editor-type-id="android-manifest" />
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/hkr/da224a/jobshadow/fragments/Adapters/RecentSearchListAdapter.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1080">
-              <caret line="72" column="9" selection-start-line="72" selection-start-column="9" selection-end-line="72" selection-end-column="9" />
+            <state relative-caret-position="1125">
+              <caret line="111" column="70" selection-start-line="111" selection-start-column="70" selection-end-line="111" selection-end-column="70" />
+              <folding>
+                <element signature="e#2352#2353#0" expanded="true" />
+                <element signature="e#2397#2398#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -165,7 +159,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/hkr/da224a/jobshadow/activities/offer_activities/OfferEditActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-405">
+            <state>
               <caret column="57" selection-start-column="57" selection-end-column="57" />
             </state>
           </provider>
@@ -2626,11 +2620,12 @@
         <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_student_profile.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_login.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/search_result_display.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/java/hkr/da224a/jobshadow/fragments/SearchFragment.java" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_offer_edit.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_offer_detail.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/values/colors.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/values/styles.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/java/hkr/da224a/jobshadow/fragments/Adapters/RecentSearchListAdapter.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/hkr/da224a/jobshadow/fragments/SearchFragment.java" />
       </list>
     </option>
   </component>
@@ -2645,8 +2640,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="PackagesPane" />
-      <pane id="Scope" />
+      <pane id="ProjectPane" />
       <pane id="AndroidView">
         <subPane>
           <expand>
@@ -2657,11 +2651,6 @@
             <path>
               <item name="job-shadow-app" type="1abcf292:AndroidViewProjectNode" />
               <item name="app" type="feadf853:AndroidModuleNode" />
-              <item name="manifests" type="f94875db:AndroidManifestsGroupNode" />
-            </path>
-            <path>
-              <item name="job-shadow-app" type="1abcf292:AndroidViewProjectNode" />
-              <item name="app" type="feadf853:AndroidModuleNode" />
               <item name="java" type="edd41e36:AndroidSourceTypeNode" />
             </path>
             <path>
@@ -2669,21 +2658,6 @@
               <item name="app" type="feadf853:AndroidModuleNode" />
               <item name="java" type="edd41e36:AndroidSourceTypeNode" />
               <item name="jobshadow" type="cbb59c9e:AndroidPsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="job-shadow-app" type="1abcf292:AndroidViewProjectNode" />
-              <item name="app" type="feadf853:AndroidModuleNode" />
-              <item name="java" type="edd41e36:AndroidSourceTypeNode" />
-              <item name="jobshadow" type="cbb59c9e:AndroidPsiDirectoryNode" />
-              <item name="activities" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="job-shadow-app" type="1abcf292:AndroidViewProjectNode" />
-              <item name="app" type="feadf853:AndroidModuleNode" />
-              <item name="java" type="edd41e36:AndroidSourceTypeNode" />
-              <item name="jobshadow" type="cbb59c9e:AndroidPsiDirectoryNode" />
-              <item name="activities" type="462c0819:PsiDirectoryNode" />
-              <item name="offer_activities" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="job-shadow-app" type="1abcf292:AndroidViewProjectNode" />
@@ -2695,47 +2669,14 @@
             <path>
               <item name="job-shadow-app" type="1abcf292:AndroidViewProjectNode" />
               <item name="app" type="feadf853:AndroidModuleNode" />
-              <item name="java" type="edd41e36:AndroidSourceTypeNode" />
-              <item name="jobshadow" type="cbb59c9e:AndroidPsiDirectoryNode" />
-              <item name="fragments" type="462c0819:PsiDirectoryNode" />
-              <item name="Adapters" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="job-shadow-app" type="1abcf292:AndroidViewProjectNode" />
-              <item name="app" type="feadf853:AndroidModuleNode" />
-              <item name="java" type="edd41e36:AndroidSourceTypeNode" />
-              <item name="jobshadow" type="cbb59c9e:AndroidPsiDirectoryNode" />
-              <item name="model" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="job-shadow-app" type="1abcf292:AndroidViewProjectNode" />
-              <item name="app" type="feadf853:AndroidModuleNode" />
               <item name="res" type="d4f16f75:AndroidResFolderNode" />
-            </path>
-            <path>
-              <item name="job-shadow-app" type="1abcf292:AndroidViewProjectNode" />
-              <item name="app" type="feadf853:AndroidModuleNode" />
-              <item name="res" type="d4f16f75:AndroidResFolderNode" />
-              <item name="layout" type="ddeffd01:AndroidResFolderTypeNode" />
-            </path>
-            <path>
-              <item name="job-shadow-app" type="1abcf292:AndroidViewProjectNode" />
-              <item name="app" type="feadf853:AndroidModuleNode" />
-              <item name="res" type="d4f16f75:AndroidResFolderNode" />
-              <item name="values" type="ddeffd01:AndroidResFolderTypeNode" />
-            </path>
-            <path>
-              <item name="job-shadow-app" type="1abcf292:AndroidViewProjectNode" />
-              <item name="app" type="feadf853:AndroidModuleNode" />
-              <item name="res" type="d4f16f75:AndroidResFolderNode" />
-              <item name="values" type="ddeffd01:AndroidResFolderTypeNode" />
-              <item name="styles" type="c431d0b8:AndroidResGroupNode" />
             </path>
           </expand>
           <select />
         </subPane>
       </pane>
-      <pane id="ProjectPane" />
+      <pane id="Scope" />
+      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -2903,12 +2844,12 @@
       <window_info anchor="bottom" id="Logcat" order="0" />
       <window_info anchor="bottom" id="TODO" order="1" />
       <window_info anchor="bottom" id="Debug" order="2" />
-      <window_info anchor="bottom" id="Terminal" order="3" weight="0.32864866" />
+      <window_info anchor="bottom" id="Terminal" order="3" weight="0.32827735" />
       <window_info anchor="bottom" id="Version Control" order="4" />
       <window_info anchor="bottom" id="Event Log" order="5" side_tool="true" />
-      <window_info active="true" anchor="bottom" id="Build" order="6" visible="true" weight="0.30769232" />
+      <window_info anchor="bottom" id="Build" order="6" weight="0.30769232" />
       <window_info anchor="bottom" id="Android Profiler" order="7" weight="0.32936078" />
-      <window_info anchor="bottom" id="Run" order="8" weight="0.32936078" />
+      <window_info active="true" anchor="bottom" id="Run" order="8" visible="true" weight="0.32936078" />
       <window_info anchor="right" id="Capture Analysis" order="0" />
       <window_info anchor="right" id="Gradle" order="1" />
       <window_info anchor="right" id="Theme Preview" order="2" />
@@ -3045,10 +2986,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="3465">
           <caret line="274" selection-start-line="274" selection-end-line="274" />
-          <folding>
-            <element signature="e#6392#6393#0" expanded="true" />
-            <element signature="e#6442#6443#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -3107,13 +3044,6 @@
       </provider>
       <provider editor-type-id="android-designer2" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/hkr/da224a/jobshadow/fragments/Adapters/RecentSearchListAdapter.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="660">
-          <caret line="74" column="44" selection-start-line="74" selection-start-column="44" selection-end-line="74" selection-end-column="44" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/hkr/da224a/jobshadow/fragments/Adapters/OfferListAdapter.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="255">
@@ -3146,17 +3076,6 @@
         </state>
       </provider>
       <provider editor-type-id="android-designer2" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/hkr/da224a/jobshadow/fragments/SearchFragment.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="450">
-          <caret line="161" column="56" selection-start-line="161" selection-start-column="56" selection-end-line="161" selection-end-column="56" />
-          <folding>
-            <element signature="e#3067#3566#0" expanded="true" />
-            <element signature="e#3565#3566#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/hkr/da224a/jobshadow/activities/offer_activities/BusinessEditActivity.java">
       <provider selected="true" editor-type-id="text-editor">
@@ -3195,24 +3114,12 @@
       <provider editor-type-id="text-editor" />
       <provider selected="true" editor-type-id="android-designer2" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/hkr/da224a/jobshadow/activities/offer_activities/OfferEditActivity.java">
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/values/styles.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-405">
-          <caret column="57" selection-start-column="57" selection-end-column="57" />
+        <state relative-caret-position="225">
+          <caret line="15" column="71" selection-start-line="15" selection-start-column="71" selection-end-line="15" selection-end-column="71" />
         </state>
       </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/AndroidManifest.xml">
-      <provider editor-type-id="android-manifest" />
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1080">
-          <caret line="72" column="9" selection-start-line="72" selection-start-column="9" selection-end-line="72" selection-end-column="9" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/fragment_search.xml">
-      <provider selected="true" editor-type-id="text-editor" />
-      <provider editor-type-id="android-designer2" />
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/values/colors.xml">
       <provider selected="true" editor-type-id="text-editor">
@@ -3221,10 +3128,40 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/values/styles.xml">
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/hkr/da224a/jobshadow/activities/offer_activities/OfferEditActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="225">
-          <caret line="15" column="71" selection-start-line="15" selection-start-column="71" selection-end-line="15" selection-end-column="71" />
+        <state>
+          <caret column="57" selection-start-column="57" selection-end-column="57" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/fragment_search.xml">
+      <provider selected="true" editor-type-id="text-editor" />
+      <provider editor-type-id="android-designer2" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/AndroidManifest.xml">
+      <provider editor-type-id="android-manifest" />
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="526">
+          <caret line="72" column="9" selection-start-line="72" selection-start-column="9" selection-end-line="72" selection-end-column="9" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/hkr/da224a/jobshadow/fragments/Adapters/RecentSearchListAdapter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1125">
+          <caret line="111" column="70" selection-start-line="111" selection-start-column="70" selection-end-line="111" selection-end-column="70" />
+          <folding>
+            <element signature="e#2352#2353#0" expanded="true" />
+            <element signature="e#2397#2398#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/hkr/da224a/jobshadow/fragments/SearchFragment.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="297">
+          <caret line="122" column="55" selection-start-line="122" selection-start-column="55" selection-end-line="122" selection-end-column="55" />
         </state>
       </provider>
     </entry>

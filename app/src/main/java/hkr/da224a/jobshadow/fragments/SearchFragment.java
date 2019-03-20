@@ -40,6 +40,7 @@ public class SearchFragment extends Fragment {
 
 
     ArrayList<Offer> offers = new ArrayList<>();
+    SearchView mSearchView;
 
     TextView mEmptyView;
     ArrayAdapter<String>  mAdapter;
@@ -87,9 +88,13 @@ public class SearchFragment extends Fragment {
 //        strings.add("aabbaaaa");
 //        strings.add("cccaaaaa");
 
+        TextView emptyList = new TextView(getContext());
+        emptyList.setText("The list is empty");
+
         mAdapter = new ArrayAdapter(getContext(),android.R.layout.simple_list_item_1, offers);
         ListView mListView = (ListView) view.findViewById(R.id.result_list);
         mListView.setEmptyView(getActivity().findViewById(R.id.emptyView));
+        mListView.setEmptyView(emptyList);
         mListView.setAdapter(mAdapter);
         mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -97,7 +102,7 @@ public class SearchFragment extends Fragment {
                 Intent intent =  new Intent(getContext(), OfferDetailActivity.class);
                 intent.putExtra("selected_offer", (Offer)adapterView.getItemAtPosition(i));
                 intent.putExtra("origin", "student");
-                intent.putExtra("studentID",1);
+                intent.putExtra("studentID",0);
                 getContext().startActivity(intent);
             }
         });
@@ -118,18 +123,14 @@ public class SearchFragment extends Fragment {
         mEmptyView = (TextView) getActivity().findViewById(R.id.emptyView);
         childDataItems.add(new ChildDataItem("String 1"));
         childDataItems.add(new ChildDataItem("String 2"));
-        childDataItems.add(new ChildDataItem("String 3"));
-        childDataItems.add(new ChildDataItem("String 4"));
-        childDataItems.add(new ChildDataItem("String 5"));
+        childDataItems.add(new ChildDataItem("Job title 20"));
+        childDataItems.add(new ChildDataItem("Job title 9"));
+        childDataItems.add(new ChildDataItem("Job title 88"));
         parentDataItems.add(new ParentDataItem("Recent searches", childDataItems));
 
-        RecyclerView recyclerView = (RecyclerView) getActivity().findViewById(R.id.recent_search_view);
-        recyclerView.setHasFixedSize(true);
-        LinearLayoutManager layoutManager = new LinearLayoutManager(this.getActivity());
-        recyclerView.setLayoutManager(layoutManager);
-        mRecycleAdapter = new RecentSearchListAdapter(parentDataItems);
-        recyclerView.setAdapter(mRecycleAdapter);
     }
+
+
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
@@ -137,24 +138,31 @@ public class SearchFragment extends Fragment {
         MenuItem mSearch = menu.findItem(R.id.action_search);
 
 
-        SearchView mSearchView = (SearchView) mSearch.getActionView();
+        mSearchView = (SearchView) mSearch.getActionView();
         mSearchView.setQueryHint("Search");
+
+        RecyclerView recyclerView = (RecyclerView) getActivity().findViewById(R.id.recent_search_view);
+        recyclerView.setHasFixedSize(true);
+        LinearLayoutManager layoutManager = new LinearLayoutManager(this.getActivity());
+        recyclerView.setLayoutManager(layoutManager);
+        mRecycleAdapter = new RecentSearchListAdapter(parentDataItems, mSearchView);
+        recyclerView.setAdapter(mRecycleAdapter);
 
         mSearchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
+                childDataItems.remove(0);
                 childDataItems.add(new ChildDataItem(query));
-                parentDataItems.add(0,new ParentDataItem("Recent searches", childDataItems)) ;
+                parentDataItems.remove(0);
+                mRecycleAdapter.notifyItemRemoved(0);
+                parentDataItems.add(new ParentDataItem("Recent search:", childDataItems));
                 mRecycleAdapter.notifyItemInserted(0);
-                parentDataItems.remove(1);
-                mRecycleAdapter.notifyItemRemoved(1);
                 return true;
             }
 
             @Override
             public boolean onQueryTextChange(String newText) {
                 mAdapter.getFilter().filter(newText);
-                System.out.println("COUNT " + mAdapter.getCount() );
                 if (mAdapter.getCount() == 0){
                     mEmptyView.setVisibility(View.VISIBLE);
                 }
