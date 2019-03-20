@@ -82,10 +82,10 @@
 
             <Button
                 android:id="@+id/email_sign_in_button"
-                style="?android:textAppearanceSmall"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
+                android:background="@color/colorPrimaryDark"
                 android:text="@string/action_sign_in"
                 android:textStyle="bold" />
 
@@ -93,7 +93,9 @@
                 android:id="@+id/register_button"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/action_register" />
+                android:background="@color/colorPrimaryDark"
+                android:text="@string/action_register"
+                android:textStyle="bold" />
 
             <com.facebook.login.widget.LoginButton
                 android:id="@+id/facebook_login_button"
