@@ -18,6 +18,9 @@ import android.view.MenuItem;
 import android.widget.Button;
 
 import com.facebook.login.LoginManager;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.MobileAds;
 import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.ArrayList;
@@ -33,12 +36,18 @@ import hkr.da224a.jobshadow.utils.SQLiteDatabaseHelper;
 public class BusinessMainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
-
+        private AdView adView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_business_main);
+
+        MobileAds.initialize(this,"ca-app-pub-9133678383325719~9752466165");
+        adView=findViewById(R.id.AdView);
+        AdRequest adRequest = new AdRequest.Builder().build();
+        adView.loadAd(adRequest);
+
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         toolbar.setTitle("My offers");
 

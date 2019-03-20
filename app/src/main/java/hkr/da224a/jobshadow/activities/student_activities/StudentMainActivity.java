@@ -15,6 +15,9 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.facebook.login.LoginManager;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.MobileAds;
 import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.ArrayList;
@@ -40,11 +43,16 @@ public class StudentMainActivity extends AppCompatActivity
     private NoSwipeViewPager viewPager;
 
     public int userID;
-
+    private AdView adView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_student_main);
+
+        MobileAds.initialize(this,"ca-app-pub-9133678383325719~9752466165");
+        adView=findViewById(R.id.AdView2);
+        AdRequest adRequest = new AdRequest.Builder().build();
+        adView.loadAd(adRequest);
 
         Intent intent = getIntent();
         String email = intent.getStringExtra("email_of_user");

@@ -10,6 +10,17 @@
     tools:context=".activities.student_activities.StudentMainActivity"
     tools:showIn="@layout/app_bar_student_main">
 
+    <com.google.android.gms.ads.AdView
+        android:id="@+id/AdView2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        app:adSize="BANNER"
+        app:adUnitId="ca-app-pub-3940256099942544/6300978111">
+
+    </com.google.android.gms.ads.AdView>
+
+
     <hkr.da224a.jobshadow.NoSwipeViewPager
         android:id="@+id/main_menu_holder"
         android:layout_width="match_parent"
