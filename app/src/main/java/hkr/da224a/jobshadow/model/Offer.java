@@ -214,25 +214,6 @@ public class Offer implements Parcelable {
         this.dateCreated = dateCreated;
     }
 
-    /**
-     *
-     * @return string representation of object
-     */
-    @Override
-    public String toString() {
-        return "Offer{" +
-                "offerID=" + offerID +
-                ", businessID=" + businessID +
-                ", categoryID=" + categoryID +
-                ", offerTitle='" + offerTitle + '\'' +
-                ", offerLength='" + offerLength + '\'' +
-                ", offerPositionQuals='" + offerPositionQuals + '\'' +
-                ", offerLocation='" + offerLocation + '\'' +
-                ", description='" + description + '\'' +
-                ", dateCreated='" + dateCreated + '\'' +
-                '}';
-    }
-
     @Override
     public int describeContents() {
         return 0;
@@ -281,5 +262,13 @@ public class Offer implements Parcelable {
         }else{
             dateCreated = Timestamp.valueOf(temp);
         }
+    }
+
+    /**
+     * @return string representation of object
+     */
+    @Override
+    public String toString() {
+        return  offerTitle;
     }
 }
