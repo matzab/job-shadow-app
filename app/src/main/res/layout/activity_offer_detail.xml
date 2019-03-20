@@ -140,7 +140,8 @@
                 android:layout_marginRight="40dp"
                 android:background="#00bbbb"
                 android:text="APPLY"
-                android:textSize="20sp" />
+                android:textSize="20sp"
+                app:backgroundTint="#00bbbb" />
 
         </LinearLayout>
     </android.support.v4.widget.NestedScrollView>

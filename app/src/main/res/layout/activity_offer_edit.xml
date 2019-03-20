@@ -120,7 +120,8 @@
                 android:layout_marginRight="40dp"
                 android:background="#00bbbb"
                 android:text="SAVE AND EXIT"
-                android:textSize="20sp" />
+                android:textSize="20sp"
+                app:backgroundTint="#00bbbb" />
 
             <View
                 android:id="@+id/divider7"
@@ -139,7 +140,8 @@
                 android:background="#00bbbb"
                 android:onClick="onSaveButtonClick"
                 android:text="CANCEL"
-                android:textSize="20sp" />
+                android:textSize="20sp"
+                app:backgroundTint="#00bbbb" />
 
         </LinearLayout>
     </android.support.v4.widget.NestedScrollView>
