@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -26,8 +27,8 @@
                     android:id="@+id/role_text"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:ems="10"
                     android:enabled="false"
+                    android:ems="10"
                     android:inputType="textPersonName"
                     android:text="@string/role_text" />
 
@@ -66,78 +67,6 @@
                     android:layout_height="wrap_content"
                     android:ems="10"
                     android:hint="@string/prompt_email"
-                    android:inputType="textEmailAddress" />
-
-                <AutoCompleteTextView
-                    android:id="@+id/f_name_text_field"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:ems="10"
-                    android:hint="@string/first_name"
-                    android:inputType="textEmailAddress" />
-
-                <AutoCompleteTextView
-                    android:id="@+id/l_name_text_field"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:ems="10"
-                    android:hint="@string/last_name"
-                    android:inputType="textEmailAddress" />
-
-                <AutoCompleteTextView
-                    android:id="@+id/phone_text_field"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:ems="10"
-                    android:hint="@string/phone"
-                    android:inputType="textEmailAddress" />
-
-                <AutoCompleteTextView
-                    android:id="@+id/city_text_field"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:ems="10"
-                    android:hint="@string/city"
-                    android:inputType="textEmailAddress" />
-
-                <AutoCompleteTextView
-                    android:id="@+id/dob_text_field"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:ems="10"
-                    android:hint="@string/date_of_birth"
-                    android:inputType="textEmailAddress" />
-
-                <AutoCompleteTextView
-                    android:id="@+id/desc_text_field"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:ems="10"
-                    android:hint="@string/desc"
-                    android:inputType="textEmailAddress" />
-
-                <AutoCompleteTextView
-                    android:id="@+id/search_program_text_field"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:ems="10"
-                    android:hint="@string/search_program"
-                    android:inputType="textEmailAddress" />
-
-                <AutoCompleteTextView
-                    android:id="@+id/ice_text_field"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:ems="10"
-                    android:hint="@string/in_case_of_emergency_number"
-                    android:inputType="textEmailAddress" />
-
-                <AutoCompleteTextView
-                    android:id="@+id/degree_program_text_field"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:ems="10"
-                    android:hint="@string/degree_program"
                     android:inputType="textEmailAddress" />
 
                 <View

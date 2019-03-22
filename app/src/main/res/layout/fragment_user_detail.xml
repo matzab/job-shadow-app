@@ -64,7 +64,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Emergency phone number:" />
-
         <TextView
             android:id="@+id/emergency_number"
             android:layout_width="match_parent"
@@ -74,7 +73,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Date of birth:" />
-
         <TextView
             android:id="@+id/date_of_birth"
             android:layout_width="match_parent"
@@ -109,7 +107,7 @@
         <TextView
             android:id="@+id/join_date"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"/>
 
     </LinearLayout>
 </android.support.v4.widget.NestedScrollView>

@@ -15,6 +15,9 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.facebook.login.LoginManager;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.MobileAds;
 import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.ArrayList;
@@ -34,16 +37,22 @@ import hkr.da224a.jobshadow.utils.SQLiteDatabaseHelper;
 public class StudentMainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
-    public int userID;
     private Stack<Integer> backStack = new Stack<>();
     private DrawerLayout drawer = null;
     private BottomNavigationView bottomNav;
     private NoSwipeViewPager viewPager;
 
+    public int userID;
+    private AdView adView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_student_main);
+
+        MobileAds.initialize(this,"ca-app-pub-9133678383325719~9752466165");
+        adView=findViewById(R.id.AdView2);
+        AdRequest adRequest = new AdRequest.Builder().build();
+        adView.loadAd(adRequest);
 
         Intent intent = getIntent();
         String email = intent.getStringExtra("email_of_user");
@@ -51,8 +60,8 @@ public class StudentMainActivity extends AppCompatActivity
 
         SQLiteDatabaseHelper sqLiteDatabaseHelper = new SQLiteDatabaseHelper(this);
         ArrayList<Student> studentList = sqLiteDatabaseHelper.getAllStudents();
-        for (int i = 0; i < studentList.size(); i++) {
-            if (studentList.get(i).getEmailAddress().equals(email)) {
+        for(int i = 0; i < studentList.size(); i++){
+            if(studentList.get(i).getEmailAddress().equals(email)){
                 ID = studentList.get(i).getStudentID();
             }
         }
@@ -66,7 +75,6 @@ public class StudentMainActivity extends AppCompatActivity
             public void onPageScrolled(int i, float v, int i1) {
 
             }
-
             @Override
             public void onPageSelected(int i) {
                 int currentItem = viewPager.getCurrentItem();
@@ -172,7 +180,7 @@ public class StudentMainActivity extends AppCompatActivity
                 break;
             case R.id.nav_applications:
                 intent = new Intent(StudentMainActivity.this, MyApplicationsActivity.class);
-                intent.putExtra("userID", userID);
+                intent.putExtra("userID",userID);
                 StudentMainActivity.this.startActivity(intent);
                 break;
         }

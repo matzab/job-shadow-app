@@ -62,6 +62,7 @@ public class OfferCategory {
     }
 
     /**
+     *
      * @return String representation of object.
      */
     @Override

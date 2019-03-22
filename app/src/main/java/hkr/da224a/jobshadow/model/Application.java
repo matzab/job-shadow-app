@@ -1,5 +1,7 @@
 package hkr.da224a.jobshadow.model;
 
+import java.sql.Timestamp;
+
 /**
  * The type Application.
  */
@@ -8,6 +10,7 @@ public class Application {
     private int applicationID;
     private int studentID;
     private int offerID;
+    private Timestamp applicationDate;
 
     /**
      * Instantiates a new Application.
@@ -18,14 +21,16 @@ public class Application {
     /**
      * Instantiates a new Application.
      *
-     * @param applicationID the application id
-     * @param studentID     the student id
-     * @param offerID       the offer id
+     * @param applicationID   the application id
+     * @param studentID       the student id
+     * @param offerID         the offer id
+     * @param applicationDate the application date
      */
-    public Application(int applicationID, int studentID, int offerID) {
+    public Application(int applicationID, int studentID, int offerID, Timestamp applicationDate) {
         this.applicationID = applicationID;
         this.studentID = studentID;
         this.offerID = offerID;
+        this.applicationDate = applicationDate;
     }
 
     /**
@@ -82,8 +87,26 @@ public class Application {
         this.offerID = offerID;
     }
 
+    /**
+     * Gets application date.
+     *
+     * @return the application date
+     */
+    public Timestamp getApplicationDate() {
+        return applicationDate;
+    }
 
     /**
+     * Sets application date.
+     *
+     * @param applicationDate the application date
+     */
+    public void setApplicationDate(Timestamp applicationDate) {
+        this.applicationDate = applicationDate;
+    }
+
+    /**
+     *
      * @return a string representation of object
      */
     @Override
@@ -92,6 +115,7 @@ public class Application {
                 "applicationID=" + applicationID +
                 ", studentID=" + studentID +
                 ", offerID=" + offerID +
+                ", applicationDate=" + applicationDate +
                 '}';
     }
 }

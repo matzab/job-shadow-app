@@ -8,10 +8,32 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <style name="AppTheme2" parent="Base.Theme.MaterialComponents">
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="materialButtonStyle">@style/AppTheme2.Button</item>
+        <item name="android:windowBackground">@color/activityBackground</item>
+    </style>
+
+    <style name="AppTheme2.Button"  parent="Widget.MaterialComponents.Button">
+        <item name="android:textColor">@android:color/black</item>
+    </style>
+
     <style name="AppTheme.NoActionBar">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
     </style>
+
+    <style name="AppTheme2.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="AppTheme.AppBarOverlay2" parent="ThemeOverlay.MaterialComponents.Dark.ActionBar" />
+
+    <style name="AppTheme.PopupOverlay2" parent="ThemeOverlay.MaterialComponents.Light" />
+
 
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 

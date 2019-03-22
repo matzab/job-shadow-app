@@ -1,11 +1,11 @@
 package hkr.da224a.jobshadow.model;
 
-import java.io.Serializable;
+import java.sql.Timestamp;
 
 /**
  * The type Student.
  */
-public class Student implements Serializable {
+public class Student {
     private static final String accountType = "Student";
     private int studentID;
     private String password;
@@ -19,6 +19,7 @@ public class Student implements Serializable {
     private String degreeProgram;
     private String searchPrefs;
     private String description;
+    private Timestamp dateCreated;
 
     /**
      * Instantiates a new Student.
@@ -41,10 +42,11 @@ public class Student implements Serializable {
      * @param degreeProgram     the degree program
      * @param searchPrefs       the search prefs
      * @param description       the description
+     * @param dateCreated       the date created
      */
     public Student(int studentID, String password, String firstName, String lastName, long phoneNumber,
                    String emailAddress, String city, String dateOfBirth, long inCaseOfEmergency,
-                   String degreeProgram, String searchPrefs, String description) {
+                   String degreeProgram, String searchPrefs, String description, Timestamp dateCreated) {
         this.studentID = studentID;
         this.password = password;
         this.firstName = firstName;
@@ -57,8 +59,8 @@ public class Student implements Serializable {
         this.degreeProgram = degreeProgram;
         this.searchPrefs = searchPrefs;
         this.description = description;
+        this.dateCreated = dateCreated;
     }
-
 
     /**
      * Gets account type.
@@ -285,10 +287,31 @@ public class Student implements Serializable {
         this.description = description;
     }
 
+    /**
+     * Gets date created.
+     *
+     * @return the date created
+     */
+    public Timestamp getDateCreated() {
+        return dateCreated;
+    }
+
+    /**
+     * Sets date created.
+     *
+     * @param dateCreated the date created
+     */
+    public void setDateCreated(Timestamp dateCreated) {
+        this.dateCreated = dateCreated;
+    }
+
+    /**
+     * @return a string representation of the object
+     */
     @Override
     public String toString() {
         return "Student{" +
-                "studentID=" + studentID +
+                "studentID='" + studentID + '\'' +
                 ", password='" + password + '\'' +
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
@@ -296,10 +319,11 @@ public class Student implements Serializable {
                 ", emailAddress='" + emailAddress + '\'' +
                 ", city='" + city + '\'' +
                 ", dateOfBirth='" + dateOfBirth + '\'' +
-                ", inCaseOfEmergency=" + inCaseOfEmergency +
+                ", inCaseOfEmergency='" + inCaseOfEmergency + '\'' +
                 ", degreeProgram='" + degreeProgram + '\'' +
                 ", searchPrefs='" + searchPrefs + '\'' +
                 ", description='" + description + '\'' +
+                ", dateCreated=" + dateCreated +
                 '}';
     }
 }

@@ -1,6 +1,7 @@
 package hkr.da224a.jobshadow.fragments.Adapters;
 
 import android.content.Context;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -19,6 +20,7 @@ public class RecentSearchListAdapter extends RecyclerView.Adapter<RecentSearchLi
     private ArrayList<ParentDataItem> parentDataItems;
 
 
+
     public RecentSearchListAdapter(ArrayList<ParentDataItem> parentDataItems) {
         this.parentDataItems = parentDataItems;
     }
@@ -33,8 +35,8 @@ public class RecentSearchListAdapter extends RecyclerView.Adapter<RecentSearchLi
     @Override
     public void onBindViewHolder(MyViewHolder holder, final int position) {
 
-        ParentDataItem dummyParentDataItem = parentDataItems.get(position);
-        holder.textView_parentName.setText(dummyParentDataItem.getParentName());
+        ParentDataItem parentDataItem = parentDataItems.get(position);
+        holder.textView_parentName.setText(parentDataItem.getParentName());
         //
         int noOfChildTextViews = holder.linearLayout_childItems.getChildCount();
         for (int index = 0; index < noOfChildTextViews; index++) {
@@ -42,7 +44,7 @@ public class RecentSearchListAdapter extends RecyclerView.Adapter<RecentSearchLi
             currentTextView.setVisibility(View.VISIBLE);
         }
 
-        int noOfChild = dummyParentDataItem.getChildDataItems().size();
+        int noOfChild = parentDataItem.getChildDataItems().size();
         if (noOfChild < noOfChildTextViews) {
             for (int index = noOfChild; index < noOfChildTextViews; index++) {
                 TextView currentTextView = (TextView) holder.linearLayout_childItems.getChildAt(index);
@@ -51,17 +53,18 @@ public class RecentSearchListAdapter extends RecyclerView.Adapter<RecentSearchLi
         }
         for (int textViewIndex = 0; textViewIndex < noOfChild; textViewIndex++) {
             TextView currentTextView = (TextView) holder.linearLayout_childItems.getChildAt(textViewIndex);
-            currentTextView.setText(dummyParentDataItem.getChildDataItems().get(textViewIndex).getChildName());
+            currentTextView.setText(parentDataItem.getChildDataItems().get(textViewIndex).getChildName());
         }
 
     }
+
+
 
 
     @Override
     public int getItemCount() {
         return parentDataItems.size();
     }
-
     class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         private Context context;
         private TextView textView_parentName;
@@ -83,7 +86,7 @@ public class RecentSearchListAdapter extends RecyclerView.Adapter<RecentSearchLi
                 textView.setId(indexView);
                 textView.setPadding(0, 20, 0, 20);
                 textView.setGravity(Gravity.CENTER);
-                //    textView.setBackground(ContextCompat.getDrawable(context, R.drawable.background_sub_module_text));
+            //    textView.setBackground(ContextCompat.getDrawable(context, R.drawable.background_sub_module_text));
                 LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
                 textView.setOnClickListener(this);
                 linearLayout_childItems.addView(textView, layoutParams);

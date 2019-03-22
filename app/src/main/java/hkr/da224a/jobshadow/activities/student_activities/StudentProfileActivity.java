@@ -22,6 +22,7 @@ public class StudentProfileActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_student_profile);
+
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         setupActionBar();
@@ -36,7 +37,7 @@ public class StudentProfileActivity extends AppCompatActivity {
         editButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(StudentProfileActivity.this, StudentEditActivity.class);
+                Intent intent = new Intent(StudentProfileActivity.this,StudentEditActivity.class);
                 StudentProfileActivity.this.startActivity(intent);
             }
         });
@@ -72,17 +73,17 @@ public class StudentProfileActivity extends AppCompatActivity {
         }
     }
 
-    @Override
-    public boolean onSupportNavigateUp() {
-        onBackPressed();
-        return true;
-    }
-
     private void setupViewPager(ViewPager viewPager) {
         ViewPagerAdapter viewPagerAdapter =
                 new ViewPagerAdapter(getSupportFragmentManager());
         viewPagerAdapter.addFragment(new UserDetailFragment(), "Details");
         viewPagerAdapter.addFragment(new HistoryFragment(), "History");
         viewPager.setAdapter(viewPagerAdapter);
+    }
+
+    @Override
+    public boolean onSupportNavigateUp() {
+        onBackPressed();
+        return true;
     }
 }
