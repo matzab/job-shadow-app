@@ -51,8 +51,6 @@ public class StudentEditActivity extends AppCompatActivity {
     }
 
 
-
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.save_menu_option, menu);
@@ -71,7 +69,7 @@ public class StudentEditActivity extends AppCompatActivity {
         //noinspection SimplifiableIfStatement
         if (id == R.id.save_option) {
 
-          // TODO save logic here...
+            // TODO save logic here...
 
             return true;
         }

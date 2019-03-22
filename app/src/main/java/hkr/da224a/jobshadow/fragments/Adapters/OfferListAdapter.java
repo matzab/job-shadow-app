@@ -54,14 +54,19 @@ public class OfferListAdapter extends RecyclerView.Adapter<OfferListAdapter.MyVi
         holder.linearLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent =  new Intent(mContext, OfferDetailActivity.class);
+                Intent intent = new Intent(mContext, OfferDetailActivity.class);
                 intent.putExtra("selected_offer", mDataset.get(position));
-                intent.putExtra("origin",mOrigin);
-                intent.putExtra("studentID",mStudentID);
+                intent.putExtra("origin", mOrigin);
+                intent.putExtra("studentID", mStudentID);
                 mContext.startActivity(intent);
             }
         });
 
+    }
+
+    @Override
+    public int getItemCount() {
+        return mDataset.size();
     }
 
     public static class MyViewHolder extends RecyclerView.ViewHolder {
@@ -83,16 +88,13 @@ public class OfferListAdapter extends RecyclerView.Adapter<OfferListAdapter.MyVi
         public void setOfferTitle(String title) {
             offerTitle.setText(title);
         }
+
         public void setOfferLength(String length) {
             offerLength.setText(length);
         }
+
         public void setOfferLocation(String location) {
             offerLocation.setText(location);
         }
-    }
-
-    @Override
-    public int getItemCount() {
-        return mDataset.size();
     }
 }

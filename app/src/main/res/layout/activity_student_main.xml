@@ -31,7 +31,6 @@
             app:menu="@menu/navigation_bar" />
 
 
-
     </LinearLayout>
 
     <android.support.design.widget.NavigationView

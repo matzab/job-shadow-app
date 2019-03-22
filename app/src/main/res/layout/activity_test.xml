@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activities.TestActivity">
+
+    <TextView
+        android:id="@+id/resultTextView"
+        android:layout_width="0dp"
+        android:layout_height="300dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/searchStudentButton"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="8dp"
+        android:text="Search S by ID"
+        app:layout_constraintEnd_toEndOf="@+id/resultTextView"
+        app:layout_constraintHorizontal_bias="0.12"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/searchEmailButton"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:text="Search S by Email"
+        app:layout_constraintBottom_toBottomOf="@+id/searchStudentButton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.87"
+        app:layout_constraintStart_toEndOf="@+id/searchStudentButton"
+        app:layout_constraintTop_toTopOf="@+id/searchStudentButton" />
+
+    <Button
+        android:id="@+id/searchOfferButton"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:text="Search Offer"
+        app:layout_constraintEnd_toEndOf="@+id/searchStudentButton"
+        app:layout_constraintStart_toStartOf="@+id/searchStudentButton"
+        app:layout_constraintTop_toBottomOf="@+id/searchStudentButton" />
+
+    <Button
+        android:id="@+id/searchBbyIDButton"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:text="Search B by ID"
+        app:layout_constraintEnd_toEndOf="@+id/searchOfferButton"
+        app:layout_constraintStart_toStartOf="@+id/searchOfferButton"
+        app:layout_constraintTop_toBottomOf="@+id/searchOfferButton" />
+
+    <Button
+        android:id="@+id/searchBbyEmailButton"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Search B by Email"
+        app:layout_constraintBottom_toBottomOf="@+id/searchBbyIDButton"
+        app:layout_constraintEnd_toEndOf="@+id/searchEmailButton"
+        app:layout_constraintStart_toStartOf="@+id/searchEmailButton"
+        app:layout_constraintTop_toTopOf="@+id/searchBbyIDButton" />
+</android.support.constraint.ConstraintLayout>

@@ -3,13 +3,21 @@ package hkr.da224a.jobshadow.model;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-import java.sql.Timestamp;
-
 /**
  * The type Offer.
  */
 public class Offer implements Parcelable {
 
+    // this is used to regenerate your object. All Parcelables must have a CREATOR that implements these two methods
+    public static final Parcelable.Creator<Offer> CREATOR = new Parcelable.Creator<Offer>() {
+        public Offer createFromParcel(Parcel in) {
+            return new Offer(in);
+        }
+
+        public Offer[] newArray(int size) {
+            return new Offer[size];
+        }
+    };
     private int offerID;
     private int businessID;
     private int categoryID;
@@ -18,7 +26,6 @@ public class Offer implements Parcelable {
     private String offerPositionQuals;
     private String offerLocation;
     private String description;
-    private Timestamp dateCreated;
 
     /**
      * Instantiates a new Offer.
@@ -37,10 +44,9 @@ public class Offer implements Parcelable {
      * @param offerPositionQuals the offer position quals
      * @param offerLocation      the offer location
      * @param description        the description
-     * @param dateCreated        the date created
      */
     public Offer(int offerID, int businessID, int categoryID, String offerTitle, String offerLength,
-                 String offerPositionQuals, String offerLocation, String description, Timestamp dateCreated) {
+                 String offerPositionQuals, String offerLocation, String description) {
         this.offerID = offerID;
         this.businessID = businessID;
         this.categoryID = categoryID;
@@ -49,7 +55,18 @@ public class Offer implements Parcelable {
         this.offerPositionQuals = offerPositionQuals;
         this.offerLocation = offerLocation;
         this.description = description;
-        this.dateCreated = dateCreated;
+    }
+
+    public Offer(Parcel in) {
+        offerID = in.readInt();
+        businessID = in.readInt();
+        categoryID = in.readInt();
+        offerTitle = in.readString();
+        offerLength = in.readString();
+        offerPositionQuals = in.readString();
+        offerLocation = in.readString();
+        description = in.readString();
+        String temp = in.readString();
     }
 
     /**
@@ -197,21 +214,20 @@ public class Offer implements Parcelable {
     }
 
     /**
-     * Gets date created.
-     *
-     * @return the date created
+     * @return string representation of object
      */
-    public Timestamp getDateCreated() {
-        return dateCreated;
-    }
-
-    /**
-     * Sets date created.
-     *
-     * @param dateCreated the date created
-     */
-    public void setDateCreated(Timestamp dateCreated) {
-        this.dateCreated = dateCreated;
+    @Override
+    public String toString() {
+        return "Offer{" +
+                "offerID=" + offerID +
+                ", businessID=" + businessID +
+                ", categoryID=" + categoryID +
+                ", offerTitle='" + offerTitle + '\'' +
+                ", offerLength='" + offerLength + '\'' +
+                ", offerPositionQuals='" + offerPositionQuals + '\'' +
+                ", offerLocation='" + offerLocation + '\'' +
+                ", description='" + description + '\'' +
+                '}';
     }
 
     @Override
@@ -229,46 +245,5 @@ public class Offer implements Parcelable {
         dest.writeString(offerPositionQuals);
         dest.writeString(offerLocation);
         dest.writeString(description);
-        if(dateCreated != null){
-            dest.writeString(dateCreated.toString());
-        }else{
-            dest.writeString("");
-        }
-    }
-
-    // this is used to regenerate your object. All Parcelables must have a CREATOR that implements these two methods
-    public static final Parcelable.Creator<Offer> CREATOR = new Parcelable.Creator<Offer>() {
-        public Offer createFromParcel(Parcel in) {
-            return new Offer(in);
-        }
-
-        public Offer[] newArray(int size) {
-            return new Offer[size];
-        }
-    };
-
-    public Offer(Parcel in){
-        offerID = in.readInt();
-        businessID = in.readInt();
-        categoryID = in.readInt();
-        offerTitle = in.readString();
-        offerLength = in.readString();
-        offerPositionQuals = in.readString();
-        offerLocation = in.readString();
-        description = in.readString();
-        String temp = in.readString();
-        if(temp.equals("")){
-            dateCreated = null;
-        }else{
-            dateCreated = Timestamp.valueOf(temp);
-        }
-    }
-
-    /**
-     * @return string representation of object
-     */
-    @Override
-    public String toString() {
-        return  offerTitle;
     }
 }

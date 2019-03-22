@@ -9,12 +9,11 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.util.Log;
 
-import java.sql.Timestamp;
 import java.util.ArrayList;
-import java.util.Calendar;
 
 import hkr.da224a.jobshadow.model.Application;
 import hkr.da224a.jobshadow.model.Business;
+import hkr.da224a.jobshadow.model.NotificationsSettings;
 import hkr.da224a.jobshadow.model.Offer;
 import hkr.da224a.jobshadow.model.OfferCategory;
 import hkr.da224a.jobshadow.model.Student;
@@ -25,14 +24,8 @@ import hkr.da224a.jobshadow.model.Student;
 public class SQLiteDatabaseHelper extends SQLiteOpenHelper {
 
     private static final String TAG = "SQLiteDatabaseHelper";
-    private Context context;
-
-    // Database Version
-    private static int DATABASE_VERSION = 1;
-
     // Database Name
     private static final String DATABASE_NAME = "JobShadow.db";
-
     // Student table name
     private static final String TABLE_STUDENT = "studentTable";
     // Business table name
@@ -43,7 +36,7 @@ public class SQLiteDatabaseHelper extends SQLiteOpenHelper {
     private static final String TABLE_APPLICATION = "applicationTable";
     // Application table name
     private static final String TABLE_OFFER_CATEGORY = "offerCategoryTable";
-
+    private static final String TABLE_NOTIFICATIONS = "notifcationsTable";
     // Student Table Columns names
     private static final String COLUMN_STUDENT_ACCOUNT_TYPE = "account_type";
     private static final String COLUMN_STUDENT_ID = "student_id";
@@ -58,9 +51,6 @@ public class SQLiteDatabaseHelper extends SQLiteOpenHelper {
     private static final String COLUMN_STUDENT_DEGREE_PROGRAM = "degree_program";
     private static final String COLUMN_STUDENT_SEARCH_PREFS = "search_prefs";
     private static final String COLUMN_STUDENT_DESC = "description";
-    private static final String COLUMN_STUDENT_DATE_CREATED = "date_created";
-
-
     // Business Table Columns names
     private static final String COLUMN_BUSINESS_ACCOUNT_TYPE = "account_type";
     private static final String COLUMN_BUSINESS_ID = "business_id";
@@ -71,8 +61,6 @@ public class SQLiteDatabaseHelper extends SQLiteOpenHelper {
     private static final String COLUMN_BUSINESS_CONTACT_NAME = "owner_name";
     private static final String COLUMN_BUSINESS_EMAIL_ADDRESS = "email_address";
     private static final String COLUMN_BUSINESS_VERIFIED = "verified";
-    private static final String COLUMN_BUSINESS_DATE_CREATED = "date_created";
-
     // Offer Table Columns names
     private static final String COLUMN_OFFER_ID = "offer_id";
     private static final String COLUMN_OFFER_BUSINESS_ID = "business_id";
@@ -82,19 +70,19 @@ public class SQLiteDatabaseHelper extends SQLiteOpenHelper {
     private static final String COLUMN_OFFER_POSITION_QUAL = "position_qual";
     private static final String COLUMN_OFFER_LOCATION = "location";
     private static final String COLUMN_OFFER_DESCRIPTION = "offer_desc";
-    private static final String COLUMN_OFFER_DATE_CREATED = "date_created";
-
     // Application Table Columns names
     private static final String COLUMN_APPLICATION_ID = "application_id";
     private static final String COLUMN_APPLICATION_STUDENT_ID = "student_id";
     private static final String COLUMN_APPLICATION_OFFER_ID = "offer_id";
-    private static final String COLUMN_APPLICATION_DATE = "date_created";
-
     // Offer Category Table Columns names
     private static final String COLUMN_CATEGORY_ID = "category_id";
     private static final String COLUMN_CATEGORY_NAME = "category_name";
-
-
+    private static final String COLUMN_NOTIFICATION_MESSAGE = "message";
+    private static final String COLUMN_NOTIFICATION_RINGTONE = "ringtone";
+    private static final String COLUMN_NOTIFICATION_VIBRATION = "vibration";
+    // Database Version
+    private static int DATABASE_VERSION = 1;
+    private Context context;
     // create table sql query for student table
     private String CREATE_STUDENT_TABLE = "CREATE TABLE "
             + TABLE_STUDENT + "("
@@ -110,8 +98,7 @@ public class SQLiteDatabaseHelper extends SQLiteOpenHelper {
             + COLUMN_STUDENT_IN_CASE_OF_EMERGENCY + " LONG,"
             + COLUMN_STUDENT_DEGREE_PROGRAM + " VARCHAR,"
             + COLUMN_STUDENT_SEARCH_PREFS + " VARCHAR,"
-            + COLUMN_STUDENT_DESC + " VARCHAR,"
-            + COLUMN_STUDENT_DATE_CREATED + " DATE" + ")";
+            + COLUMN_STUDENT_DESC + " VARCHAR" + ")";
 
     // create table sql query for business table
     private String CREATE_BUSINESS_TABLE = "CREATE TABLE "
@@ -124,8 +111,7 @@ public class SQLiteDatabaseHelper extends SQLiteOpenHelper {
             + COLUMN_BUSINESS_PHONE_NUMBER + " BIGINT,"
             + COLUMN_BUSINESS_CONTACT_NAME + " VARCHAR,"
             + COLUMN_BUSINESS_EMAIL_ADDRESS + " VARCHAR,"
-            + COLUMN_BUSINESS_VERIFIED + " BIGINT,"
-            + COLUMN_BUSINESS_DATE_CREATED + " DATE" + ")";
+            + COLUMN_BUSINESS_VERIFIED + " BIGINT" + ")";
 
     // create table sql query for business table
     private String CREATE_OFFER_TABLE = "CREATE TABLE "
@@ -137,16 +123,14 @@ public class SQLiteDatabaseHelper extends SQLiteOpenHelper {
             + COLUMN_OFFER_LENGTH + " VARCHAR,"
             + COLUMN_OFFER_POSITION_QUAL + " VARCHAR,"
             + COLUMN_OFFER_LOCATION + " VARCHAR,"
-            + COLUMN_OFFER_DESCRIPTION + " VARCHAR,"
-            + COLUMN_OFFER_DATE_CREATED + " DATE" + ")";
+            + COLUMN_OFFER_DESCRIPTION + " VARCHAR" + ")";
 
     // create table sql query for application table
     private String CREATE_APPLICATION_TABLE = "CREATE TABLE "
             + TABLE_APPLICATION + "("
             + COLUMN_APPLICATION_ID + " INTEGER PRIMARY KEY AUTOINCREMENT,"
             + COLUMN_APPLICATION_STUDENT_ID + " INTEGER,"
-            + COLUMN_APPLICATION_OFFER_ID + " INTEGER,"
-            + COLUMN_APPLICATION_DATE + " DATE" + ")";
+            + COLUMN_APPLICATION_OFFER_ID + " INTEGER" + ")";
 
     // create table sql query for application table
     private String CREATE_OFFER_CATEGORY_TABLE = "CREATE TABLE "
@@ -154,12 +138,19 @@ public class SQLiteDatabaseHelper extends SQLiteOpenHelper {
             + COLUMN_CATEGORY_ID + " INTEGER PRIMARY KEY AUTOINCREMENT,"
             + COLUMN_CATEGORY_NAME + " VARCHAR" + ")";
 
+    private String CREATE_NOTIFICATIONS_TABLE = "CREATE TABLE "
+            + TABLE_NOTIFICATIONS + "("
+            + COLUMN_NOTIFICATION_MESSAGE + " VARCHAR,"
+            + COLUMN_NOTIFICATION_RINGTONE + " VARCHAR,"
+            + COLUMN_NOTIFICATION_VIBRATION + " VARCHAR" + ")";
+
     // drop table sql query
     private String DROP_USER_TABLE = "DROP TABLE IF EXISTS " + TABLE_STUDENT;
     private String DROP_BUSINESS_TABLE = "DROP TABLE IF EXISTS " + TABLE_BUSINESS;
     private String DROP_OFFER_TABLE = "DROP TABLE IF EXISTS " + TABLE_OFFER;
     private String DROP_APPLICATION_TABLE = "DROP TABLE IF EXISTS " + TABLE_APPLICATION;
     private String DROP_CATEGORY_TABLE = "DROP TABLE IF EXISTS " + TABLE_OFFER_CATEGORY;
+    private String DROP_NOTIFICATIONS_TABLE = "DROP TABLE IF EXISTS " + TABLE_NOTIFICATIONS;
 
     /**
      * Constructor
@@ -169,6 +160,7 @@ public class SQLiteDatabaseHelper extends SQLiteOpenHelper {
     public SQLiteDatabaseHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
         this.context = context;
+        new FirebaseDatabaseHelper(context);
     }
 
     @Override
@@ -178,6 +170,7 @@ public class SQLiteDatabaseHelper extends SQLiteOpenHelper {
         db.execSQL(CREATE_APPLICATION_TABLE);
         db.execSQL(CREATE_OFFER_TABLE);
         db.execSQL(CREATE_OFFER_CATEGORY_TABLE);
+        db.execSQL(CREATE_NOTIFICATIONS_TABLE);
     }
 
 
@@ -190,6 +183,7 @@ public class SQLiteDatabaseHelper extends SQLiteOpenHelper {
         db.execSQL(DROP_APPLICATION_TABLE);
         db.execSQL(DROP_OFFER_TABLE);
         db.execSQL(DROP_CATEGORY_TABLE);
+        db.execSQL(DROP_NOTIFICATIONS_TABLE);
 
         // Create tables again
         onCreate(db);
@@ -205,6 +199,7 @@ public class SQLiteDatabaseHelper extends SQLiteOpenHelper {
      * @param student the student
      */
     public boolean addStudent(Student student) {
+
         SQLiteDatabase db = this.getWritableDatabase();
 
         ContentValues values = new ContentValues();
@@ -220,15 +215,15 @@ public class SQLiteDatabaseHelper extends SQLiteOpenHelper {
         values.put(COLUMN_STUDENT_DEGREE_PROGRAM, student.getDegreeProgram());
         values.put(COLUMN_STUDENT_SEARCH_PREFS, student.getSearchPrefs());
         values.put(COLUMN_STUDENT_DESC, student.getDescription());
-        values.put(COLUMN_STUDENT_DATE_CREATED, new Timestamp(Calendar.getInstance().getTime().getTime()).toString());
 
         // Inserting Row
-        db.insert(TABLE_STUDENT, null, values);
+        long id = db.insert(TABLE_STUDENT, null, values);
+        student.setStudentID((int) id);
         Log.e(TAG, "INSERTED INTO STUDENT TABLE");
         Log.e(TAG, student.toString());
         db.close();
 
-        return FirebaseDatabaseHelper.createNewStudentAccount(student);
+        return FirebaseDatabaseHelper.createStudent(student);
     }
 
     /**
@@ -252,7 +247,6 @@ public class SQLiteDatabaseHelper extends SQLiteOpenHelper {
                 COLUMN_STUDENT_DEGREE_PROGRAM,
                 COLUMN_STUDENT_SEARCH_PREFS,
                 COLUMN_STUDENT_DESC,
-                COLUMN_STUDENT_DATE_CREATED,
         };
         // sorting orders
         String sortOrder =
@@ -292,7 +286,6 @@ public class SQLiteDatabaseHelper extends SQLiteOpenHelper {
                 student.setDegreeProgram(cursor.getString(cursor.getColumnIndex(COLUMN_STUDENT_DEGREE_PROGRAM)));
                 student.setSearchPrefs(cursor.getString(cursor.getColumnIndex(COLUMN_STUDENT_SEARCH_PREFS)));
                 student.setDescription(cursor.getString(cursor.getColumnIndex(COLUMN_STUDENT_DESC)));
-                student.setDateCreated(Timestamp.valueOf(cursor.getString(cursor.getColumnIndex(COLUMN_STUDENT_DATE_CREATED))));
                 // Adding user record to list
                 userList.add(student);
             } while (cursor.moveToNext());
@@ -424,7 +417,6 @@ public class SQLiteDatabaseHelper extends SQLiteOpenHelper {
 
         ContentValues values = new ContentValues();
         values.put(COLUMN_BUSINESS_ACCOUNT_TYPE, Business.getAccountType());
-        values.put(COLUMN_BUSINESS_ID, business.getBusinessID());
         values.put(COLUMN_BUSINESS_NAME, business.getBusinessName());
         values.put(COLUMN_BUSINESS_PASSWORD, business.getPassword());
         values.put(COLUMN_BUSINESS_HQ_ADDRESS, business.getHqAddress());
@@ -432,15 +424,16 @@ public class SQLiteDatabaseHelper extends SQLiteOpenHelper {
         values.put(COLUMN_BUSINESS_CONTACT_NAME, business.getContactName());
         values.put(COLUMN_BUSINESS_EMAIL_ADDRESS, business.getContactEmail());
         values.put(COLUMN_BUSINESS_VERIFIED, business.isVerified());
-        values.put(COLUMN_BUSINESS_DATE_CREATED, new Timestamp(Calendar.getInstance().getTime().getTime()).toString());
 
         // Inserting Row
-        db.insert(TABLE_BUSINESS, null, values);
+        long id = db.insert(TABLE_BUSINESS, null, values);
+        business.setBusinessID((int) id);
         Log.e(TAG, "INSERTED INTO BUSINESS TABLE");
         Log.e(TAG, business.toString());
         db.close();
 
-        return FirebaseDatabaseHelper.createNewBusiness(business);
+        FirebaseDatabaseHelper.createBusiness(business);
+        return true;
     }
 
     /**
@@ -460,8 +453,7 @@ public class SQLiteDatabaseHelper extends SQLiteOpenHelper {
                 COLUMN_BUSINESS_PHONE_NUMBER,
                 COLUMN_BUSINESS_CONTACT_NAME,
                 COLUMN_BUSINESS_EMAIL_ADDRESS,
-                COLUMN_BUSINESS_VERIFIED,
-                COLUMN_BUSINESS_DATE_CREATED
+                COLUMN_BUSINESS_VERIFIED
         };
         // sorting orders
         String sortOrder =
@@ -497,7 +489,6 @@ public class SQLiteDatabaseHelper extends SQLiteOpenHelper {
                 business.setContactName(cursor.getString(cursor.getColumnIndex(COLUMN_BUSINESS_CONTACT_NAME)));
                 business.setContactEmail(cursor.getString(cursor.getColumnIndex(COLUMN_BUSINESS_EMAIL_ADDRESS)));
                 business.setVerified(Boolean.parseBoolean((cursor.getString(cursor.getColumnIndex(COLUMN_BUSINESS_VERIFIED)))));
-                business.setDateCreated(Timestamp.valueOf(cursor.getString(cursor.getColumnIndex(COLUMN_BUSINESS_DATE_CREATED))));
 
                 // Adding user record to list
                 businessList.add(business);
@@ -528,7 +519,6 @@ public class SQLiteDatabaseHelper extends SQLiteOpenHelper {
         values.put(COLUMN_BUSINESS_CONTACT_NAME, business.getContactName());
         values.put(COLUMN_BUSINESS_EMAIL_ADDRESS, business.getContactEmail());
         values.put(COLUMN_BUSINESS_VERIFIED, business.isVerified());
-        values.put(COLUMN_BUSINESS_DATE_CREATED, business.getDateCreated().toString());
 
 
         // updating row
@@ -634,7 +624,6 @@ public class SQLiteDatabaseHelper extends SQLiteOpenHelper {
         values.put(COLUMN_APPLICATION_ID, application.getApplicationID());
         values.put(COLUMN_APPLICATION_STUDENT_ID, application.getStudentID());
         values.put(COLUMN_APPLICATION_OFFER_ID, application.getOfferID());
-        values.put(COLUMN_APPLICATION_DATE, new Timestamp(Calendar.getInstance().getTime().getTime()).toString());
 
         // Inserting Row
         db.insert(TABLE_APPLICATION, null, values);
@@ -653,8 +642,7 @@ public class SQLiteDatabaseHelper extends SQLiteOpenHelper {
         String[] columns = {
                 COLUMN_APPLICATION_ID,
                 COLUMN_APPLICATION_STUDENT_ID,
-                COLUMN_APPLICATION_OFFER_ID,
-                COLUMN_APPLICATION_DATE
+                COLUMN_APPLICATION_OFFER_ID
         };
         // sorting orders
         String sortOrder =
@@ -685,7 +673,6 @@ public class SQLiteDatabaseHelper extends SQLiteOpenHelper {
                 application.setApplicationID(Integer.parseInt(cursor.getString(cursor.getColumnIndex(COLUMN_APPLICATION_ID))));
                 application.setStudentID(Integer.parseInt(cursor.getString(cursor.getColumnIndex(COLUMN_APPLICATION_STUDENT_ID))));
                 application.setOfferID(Integer.parseInt(cursor.getString(cursor.getColumnIndex(COLUMN_APPLICATION_OFFER_ID))));
-                application.setApplicationDate(Timestamp.valueOf(cursor.getString(cursor.getColumnIndex(COLUMN_APPLICATION_DATE))));
 
                 // Adding user record to list
                 applicationArrayList.add(application);
@@ -710,7 +697,6 @@ public class SQLiteDatabaseHelper extends SQLiteOpenHelper {
         values.put(COLUMN_APPLICATION_ID, application.getApplicationID());
         values.put(COLUMN_APPLICATION_STUDENT_ID, application.getStudentID());
         values.put(COLUMN_APPLICATION_OFFER_ID, application.getOfferID());
-        values.put(COLUMN_APPLICATION_DATE, application.getApplicationID());
 
 
         // updating row
@@ -775,7 +761,6 @@ public class SQLiteDatabaseHelper extends SQLiteOpenHelper {
         values.put(COLUMN_OFFER_POSITION_QUAL, offer.getOfferPositionQuals());
         values.put(COLUMN_OFFER_LOCATION, offer.getOfferLocation());
         values.put(COLUMN_OFFER_DESCRIPTION, offer.getDescription());
-        values.put(COLUMN_OFFER_DATE_CREATED, offer.getDateCreated().toString());
 
         // Inserting Row
         db.insert(TABLE_OFFER, null, values);
@@ -799,8 +784,7 @@ public class SQLiteDatabaseHelper extends SQLiteOpenHelper {
                 COLUMN_OFFER_LENGTH,
                 COLUMN_OFFER_POSITION_QUAL,
                 COLUMN_OFFER_LOCATION,
-                COLUMN_OFFER_DESCRIPTION,
-                COLUMN_OFFER_DATE_CREATED
+                COLUMN_OFFER_DESCRIPTION
         };
         // sorting orders
         String sortOrder =
@@ -836,7 +820,6 @@ public class SQLiteDatabaseHelper extends SQLiteOpenHelper {
                 offer.setOfferPositionQuals((cursor.getString(cursor.getColumnIndex(COLUMN_OFFER_POSITION_QUAL))));
                 offer.setOfferLocation((cursor.getString(cursor.getColumnIndex(COLUMN_OFFER_LOCATION))));
                 offer.setDescription((cursor.getString(cursor.getColumnIndex(COLUMN_OFFER_DESCRIPTION))));
-                offer.setDateCreated(Timestamp.valueOf(cursor.getString(cursor.getColumnIndex(COLUMN_OFFER_DATE_CREATED))));
 
                 // Adding user record to list
                 offerArrayList.add(offer);
@@ -865,8 +848,6 @@ public class SQLiteDatabaseHelper extends SQLiteOpenHelper {
         values.put(COLUMN_OFFER_POSITION_QUAL, offer.getOfferPositionQuals());
         values.put(COLUMN_OFFER_LOCATION, offer.getOfferLocation());
         values.put(COLUMN_OFFER_DESCRIPTION, offer.getDescription());
-        values.put(COLUMN_OFFER_DATE_CREATED, offer.getDateCreated().toString());
-
 
         // updating row
         db.update(TABLE_OFFER, values, COLUMN_OFFER_ID + " = ?",
@@ -945,7 +926,7 @@ public class SQLiteDatabaseHelper extends SQLiteOpenHelper {
         };
         // sorting orders
         String sortOrder =
-                COLUMN_APPLICATION_ID + " ASC";
+                COLUMN_CATEGORY_ID + " ASC";
         ArrayList<OfferCategory> applicationArrayList = new ArrayList<>();
 
         SQLiteDatabase db = this.getReadableDatabase();
@@ -999,7 +980,7 @@ public class SQLiteDatabaseHelper extends SQLiteOpenHelper {
         // updating row
         db.update(TABLE_OFFER_CATEGORY, values, COLUMN_CATEGORY_ID + " = ?",
                 new String[]{String.valueOf(offerCategory.getCategoryID())});
-        Log.e(TAG, "UPDATED OFFER_CATEGORY FROM APPLICATION TABLE");
+        Log.e(TAG, "UPDATED OFFER_CATEGORY FROM OFFER_CATEGORY TABLE");
         Log.e(TAG, offerCategory.toString());
         db.close();
     }
@@ -1014,7 +995,7 @@ public class SQLiteDatabaseHelper extends SQLiteOpenHelper {
         // delete offer_category record by id
         db.delete(TABLE_OFFER_CATEGORY, COLUMN_CATEGORY_ID + " = ?",
                 new String[]{String.valueOf(offerCategory.getCategoryID())});
-        Log.e(TAG, "DELETED APPLICATION FROM APPLICATION TABLE");
+        Log.e(TAG, "DELETED OFFER FROM OFFER_CATEGORY TABLE");
         Log.e(TAG, offerCategory.toString());
         db.close();
     }
@@ -1037,6 +1018,93 @@ public class SQLiteDatabaseHelper extends SQLiteOpenHelper {
         Log.e(TAG, "SEARCH OFFER_CATEGORY FROM OFFER_CATEGORY TABLE");
         Log.e(TAG, returnedOfferCategory.toString());
         return returnedOfferCategory;
+    }
+
+    //************************************** NOTIFICATIONS FUNCTIONALITY *********************************************//
+
+
+    public void addNotificationsSettings(NotificationsSettings notificationsSettings) {
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        ContentValues values = new ContentValues();
+        values.put(COLUMN_NOTIFICATION_MESSAGE, notificationsSettings.getMessageNotifications());
+        values.put(COLUMN_NOTIFICATION_RINGTONE, notificationsSettings.getRingtoneName());
+        values.put(COLUMN_NOTIFICATION_VIBRATION, notificationsSettings.getVibration());
+
+        // Inserting Row
+        db.insert(TABLE_NOTIFICATIONS, null, values);
+        Log.e(TAG, "INSERTED INTO NOTIFICATIONS TABLE");
+        Log.e(TAG, notificationsSettings.toString());
+        db.close();
+    }
+
+    /**
+     * This method is to fetch all applications and return the list of application records
+     *
+     * @return list all businesses
+     */
+    public NotificationsSettings getNotification() {
+        // array of columns to fetch
+        String[] columns = {
+                COLUMN_CATEGORY_ID,
+                COLUMN_CATEGORY_NAME
+        };
+        // sorting orders
+        String sortOrder =
+                COLUMN_NOTIFICATION_MESSAGE + " ASC";
+        ArrayList<NotificationsSettings> notificationsSettings = new ArrayList<>();
+
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        // query the user table
+        /*
+         * Here query function is used to fetch records from user table this function works like we use sql query.
+         * SQL query equivalent to this query function is
+         * SELECT user_id,user_name,user_email,user_password FROM user ORDER BY user_name;
+         */
+        Cursor cursor = db.query(TABLE_NOTIFICATIONS, //Table to query
+                columns,    //columns to return
+                null,        //columns for the WHERE clause
+                null,        //The values for the WHERE clause
+                null,       //group the rows
+                null,       //filter by row groups
+                sortOrder); //The sort order
+
+
+        // Traversing through all rows and adding to list
+        if (cursor.moveToFirst()) {
+            do {
+                NotificationsSettings notificationsSettings1 = new NotificationsSettings();
+                notificationsSettings1.setMessageNotifications(cursor.getString(cursor.getColumnIndex(COLUMN_NOTIFICATION_MESSAGE)));
+                notificationsSettings1.setRingtoneName(cursor.getString(cursor.getColumnIndex(COLUMN_NOTIFICATION_RINGTONE)));
+                notificationsSettings1.setVibration(cursor.getString(cursor.getColumnIndex(COLUMN_NOTIFICATION_VIBRATION)));
+
+                // Adding user record to list
+                notificationsSettings.add(notificationsSettings1);
+            } while (cursor.moveToNext());
+        }
+        cursor.close();
+        db.close();
+
+        // return user list
+        return notificationsSettings.get(0);
+    }
+
+    public void updateNotificationSettings(NotificationsSettings notificationsSettings) {
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        ContentValues values = new ContentValues();
+        values.put(COLUMN_NOTIFICATION_MESSAGE, notificationsSettings.getMessageNotifications());
+        values.put(COLUMN_NOTIFICATION_RINGTONE, notificationsSettings.getRingtoneName());
+        values.put(COLUMN_NOTIFICATION_VIBRATION, notificationsSettings.getVibration());
+
+
+        // updating row
+        db.update(TABLE_NOTIFICATIONS, values, COLUMN_NOTIFICATION_MESSAGE + " = ?",
+                new String[]{String.valueOf(notificationsSettings.getMessageNotifications())});
+        Log.e(TAG, "UPDATED TABLE_NOTIFICATIONS FROM NOTIFICATIONS TABLE");
+        Log.e(TAG, notificationsSettings.toString());
+        db.close();
     }
 
     private boolean isNetworkAvailable() {

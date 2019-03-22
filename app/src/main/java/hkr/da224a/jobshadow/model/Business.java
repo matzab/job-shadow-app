@@ -1,7 +1,5 @@
 package hkr.da224a.jobshadow.model;
 
-import java.sql.Timestamp;
-
 /**
  * The type Business.
  */
@@ -16,7 +14,6 @@ public class Business {
     private String contactEmail;
     private boolean verified;
     private String website;
-    private Timestamp dateCreated;
 
     /**
      * Instantiates a new Business.
@@ -36,10 +33,9 @@ public class Business {
      * @param contactEmail the contact email
      * @param verified     the verified
      * @param website      the website
-     * @param dateCreated  the date created
      */
     public Business(int businessID, String businessName, String password, String hqAddress, long contactPhone,
-                    String contactName, String contactEmail, boolean verified, String website, Timestamp dateCreated) {
+                    String contactName, String contactEmail, boolean verified, String website) {
         this.businessID = businessID;
         this.businessName = businessName;
         this.password = password;
@@ -222,24 +218,6 @@ public class Business {
         this.website = website;
     }
 
-    /**
-     * Gets date created.
-     *
-     * @return the date created
-     */
-    public Timestamp getDateCreated() {
-        return dateCreated;
-    }
-
-    /**
-     * Sets date created.
-     *
-     * @param dateCreated the date created
-     */
-    public void setDateCreated(Timestamp dateCreated) {
-        this.dateCreated = dateCreated;
-    }
-
     @Override
     public String toString() {
         return "Business{" +
@@ -252,7 +230,6 @@ public class Business {
                 ", contactEmail='" + contactEmail + '\'' +
                 ", verified=" + verified +
                 ", website='" + website + '\'' +
-                ", dateCreated=" + dateCreated +
                 '}';
     }
 }

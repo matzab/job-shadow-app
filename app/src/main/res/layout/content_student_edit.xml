@@ -105,8 +105,7 @@
             android:id="@+id/change_pwd_btn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Change password"
-            android:textColor="@android:color/black" />
+            android:text="Change password" />
 
     </LinearLayout>
 </android.support.v4.widget.NestedScrollView>

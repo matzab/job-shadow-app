@@ -3,7 +3,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:showIn="navigation_view">
 
+    <group android:checkableBehavior="single">
 
+        <item
+            android:id="@+id/nav_applications"
+            android:title="@string/action_my_applications" />
+    </group>
 
     <item android:title="@string/menu_header_profile_and_settings">
         <menu>

@@ -1,7 +1,7 @@
 package hkr.da224a.jobshadow.activities.business_activities;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 
 import hkr.da224a.jobshadow.R;
 

@@ -46,9 +46,7 @@ import com.google.firebase.auth.FacebookAuthProvider;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
-import java.sql.Timestamp;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -56,10 +54,7 @@ import java.util.regex.Pattern;
 import hkr.da224a.jobshadow.R;
 import hkr.da224a.jobshadow.activities.business_activities.BusinessMainActivity;
 import hkr.da224a.jobshadow.activities.student_activities.StudentMainActivity;
-import hkr.da224a.jobshadow.model.Application;
 import hkr.da224a.jobshadow.model.Business;
-import hkr.da224a.jobshadow.model.Offer;
-import hkr.da224a.jobshadow.model.OfferCategory;
 import hkr.da224a.jobshadow.model.Student;
 import hkr.da224a.jobshadow.utils.FirebaseDatabaseHelper;
 import hkr.da224a.jobshadow.utils.SQLiteDatabaseHelper;
@@ -82,14 +77,12 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
      * Id to identity READ_CONTACTS permission request.
      */
     private static final int REQUEST_READ_CONTACTS = 0;
-
+    private static final String TAG = "FACELOG";
     /**
      * Database Functionality Object
      */
     private SQLiteDatabaseHelper SQLiteDatabaseHelper;
-
     private UserLoginTask mAuthTask = null;
-
     // UI references.
     private AutoCompleteTextView mEmailView;
     private EditText mPasswordView;
@@ -97,7 +90,17 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
     private View mLoginFormView;
     private CallbackManager mCallbackManager;
     private FirebaseAuth mAuth;
-    private static final String TAG ="FACELOG";
+
+    /**
+     * Validate email boolean.
+     *
+     * @param emailStr the email str
+     * @return the boolean
+     */
+    public static boolean isEmailValid(CharSequence emailStr) {
+        Matcher matcher = VALID_EMAIL_ADDRESS_REGEX.matcher(emailStr);
+        return matcher.find();
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -130,21 +133,31 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                 // ...
             }
         });
+
+        //Temporary Code
+        Button testFirebaseMethods = findViewById(R.id.testFirebaseMethods);
+        testFirebaseMethods.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(LoginActivity.this, TestActivity.class));
+            }
+        });
 // ...
     }
+
     @Override
     public void onStart() {
         super.onStart();
         // Check if user is signed in (non-null) and update UI accordingly.
         FirebaseUser currentUser = mAuth.getCurrentUser();
 
-        if (currentUser != null){
-          updateUI();
+        if (currentUser != null) {
+            updateUI();
         }
     }
 
     private void updateUI() {
-        Intent intent= new Intent(LoginActivity.this,StudentMainActivity.class);
+        Intent intent = new Intent(LoginActivity.this, StudentMainActivity.class);
         startActivity(intent);
     }
 
@@ -155,6 +168,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         // Pass the activity result back to the Facebook SDK
         mCallbackManager.onActivityResult(requestCode, resultCode, data);
     }
+
     private void handleFacebookAccessToken(AccessToken token) {
         Log.d(TAG, "handleFacebookAccessToken:" + token);
 
@@ -164,19 +178,18 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                     @Override
                     public void onSuccess(AuthResult authResult) {
                         Log.d(TAG, "signInWithCredential:success");
-                        String email=  authResult.getUser().getEmail();
+                        String email = authResult.getUser().getEmail();
                         updateUI();
                     }
                 })
                 .addOnFailureListener(new OnFailureListener() {
                     @Override
                     public void onFailure(@NonNull Exception e) {
-                        Log.w(TAG, "signInWithCredential:failure"+ e.getMessage());
+                        Log.w(TAG, "signInWithCredential:failure" + e.getMessage());
                         Toast.makeText(getApplicationContext(), "Failed", Toast.LENGTH_LONG).show();
                     }
                 });
     }
-
 
     private void initializeWidgets() {
 
@@ -203,15 +216,6 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             @Override
             public void onClick(View view) {
                 attemptLogin();
-//                new FirebaseDatabaseHelper(getApplicationContext());
-//                new AsyncTask<Void, Void, Void>() {
-//                    @Override
-//                    protected Void doInBackground(Void... voids) {
-//                        FirebaseDatabaseHelper.createNewApplication(new Application(1,1,
-//                                1,new Timestamp(Calendar.getInstance().getTime().getTime())));
-//                        return null;
-//                    }
-//                }.execute();
             }
         });
 
@@ -271,7 +275,6 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         }
     }
 
-
     /**
      * Attempts to sign in or register the account specified by the login form.
      * If there are form errors (invalid email, missing fields, etc.), the
@@ -322,17 +325,6 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             mAuthTask = new UserLoginTask(email, password);
             mAuthTask.execute((Void) null);
         }
-    }
-
-    /**
-     * Validate email boolean.
-     *
-     * @param emailStr the email str
-     * @return the boolean
-     */
-    public static boolean isEmailValid(CharSequence emailStr) {
-        Matcher matcher = VALID_EMAIL_ADDRESS_REGEX.matcher(emailStr);
-        return matcher.find();
     }
 
     private boolean isPasswordValid(String password) {

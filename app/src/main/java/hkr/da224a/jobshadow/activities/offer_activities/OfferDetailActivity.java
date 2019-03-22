@@ -2,19 +2,15 @@ package hkr.da224a.jobshadow.activities.offer_activities;
 
 import android.content.Intent;
 import android.graphics.Color;
+import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
-import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.sql.Timestamp;
 import java.util.ArrayList;
-import java.util.Date;
 
 import hkr.da224a.jobshadow.R;
 import hkr.da224a.jobshadow.model.Application;
@@ -40,7 +36,7 @@ public class OfferDetailActivity extends AppCompatActivity {
         Button button = findViewById(R.id.button);
 
         Intent intent = getIntent();
-        final int studentID = intent.getIntExtra("studentID",0);
+        final int studentID = intent.getIntExtra("studentID", 0);
         final Offer offer = (Offer) intent.getParcelableExtra("selected_offer");
 
 
@@ -52,14 +48,13 @@ public class OfferDetailActivity extends AppCompatActivity {
                 SQLiteDatabaseHelper sqLiteDatabaseHelper = new SQLiteDatabaseHelper(OfferDetailActivity.this);
                 ArrayList<Application> applicationList = sqLiteDatabaseHelper.getAllApplications();
                 int highest = 0;
-                for(int i = 0; i < applicationList.size(); i++){
-                    if(applicationList.get(i).getApplicationID() > highest){
+                for (int i = 0; i < applicationList.size(); i++) {
+                    if (applicationList.get(i).getApplicationID() > highest) {
                         highest = applicationList.get(i).getApplicationID();
                     }
                 }
 
-                application.setApplicationID(highest+1);
-                application.setApplicationDate(new Timestamp(new Date().getTime()));
+                application.setApplicationID(highest + 1);
                 application.setOfferID(offer.getOfferID());
                 application.setStudentID(studentID);
 
@@ -70,12 +65,12 @@ public class OfferDetailActivity extends AppCompatActivity {
             }
         });
 
-        if(intent.getStringExtra("origin").equals("student")){
+        if (intent.getStringExtra("origin").equals("student")) {
             System.out.println("Origin was student.");
             SQLiteDatabaseHelper databaseHelper = new SQLiteDatabaseHelper(this);
             ArrayList<Application> applicationList = databaseHelper.getAllApplications();
-            for(int i = 0; i < applicationList.size(); i++){
-                if(applicationList.get(i).getOfferID() == offer.getOfferID() && applicationList.get(i).getStudentID() == studentID){
+            for (int i = 0; i < applicationList.size(); i++) {
+                if (applicationList.get(i).getOfferID() == offer.getOfferID() && applicationList.get(i).getStudentID() == studentID) {
                     final Application application = applicationList.get(i);
                     System.out.println("Already applied");
                     button.setText("CANCEL APPLICATION");
@@ -92,7 +87,7 @@ public class OfferDetailActivity extends AppCompatActivity {
                         }
                     });
                     break;
-                }else{
+                } else {
                     System.out.println("Not yet applied");
                     button.setText("APPLY");
                     button.setBackgroundColor(Color.parseColor("#00bbbb"));
@@ -104,14 +99,13 @@ public class OfferDetailActivity extends AppCompatActivity {
                             SQLiteDatabaseHelper sqLiteDatabaseHelper = new SQLiteDatabaseHelper(OfferDetailActivity.this);
                             ArrayList<Application> applicationList = sqLiteDatabaseHelper.getAllApplications();
                             int highest = 0;
-                            for(int i = 0; i < applicationList.size(); i++){
-                                if(applicationList.get(i).getApplicationID() > highest){
+                            for (int i = 0; i < applicationList.size(); i++) {
+                                if (applicationList.get(i).getApplicationID() > highest) {
                                     highest = applicationList.get(i).getApplicationID();
                                 }
                             }
 
-                            application.setApplicationID(highest+1);
-                            application.setApplicationDate(new Timestamp(new Date().getTime()));
+                            application.setApplicationID(highest + 1);
                             application.setOfferID(offer.getOfferID());
                             application.setStudentID(studentID);
 
@@ -125,33 +119,15 @@ public class OfferDetailActivity extends AppCompatActivity {
             }
         }
 
-        if(intent.getStringExtra("origin").equals("business")){
-
-            Button myButton = new Button(this);
-            myButton.setText("VIEW APPLICANTS");
-
-            LinearLayout ll = (LinearLayout)findViewById(R.id.linear_layout);
-            LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
-            ll.addView(myButton, lp);
-
-            myButton.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Intent intent = new Intent(OfferDetailActivity.this, OfferApplicantsActivity.class);
-                    intent.putExtra("current_offer",offer);
-                    OfferDetailActivity.this.startActivity(intent);
-                }
-            });
-
-
+        if (intent.getStringExtra("origin").equals("business")) {
             button.setText("EDIT");
             button.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     Toast.makeText(OfferDetailActivity.this, "Please edit your offer.", Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent(OfferDetailActivity.this, OfferEditActivity.class);
-                    intent.putExtra("origin","edit");
-                    intent.putExtra("current_offer",offer);
+                    intent.putExtra("origin", "edit");
+                    intent.putExtra("current_offer", offer);
                     OfferDetailActivity.this.startActivity(intent);
                     finish();
                 }
@@ -159,15 +135,11 @@ public class OfferDetailActivity extends AppCompatActivity {
         }
 
 
-
-
         offerTitle.setText(offer.getOfferTitle());
         offerLength.setText(offer.getOfferLength());
         offerPositionQuals.setText(offer.getOfferPositionQuals());
         offerLocation.setText(offer.getOfferLocation());
         offerDescription.setText(offer.getDescription());
-
-
 
 
     }

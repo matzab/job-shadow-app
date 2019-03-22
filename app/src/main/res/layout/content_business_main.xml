@@ -14,21 +14,15 @@
         android:layout_margin="20dp"
         android:orientation="vertical">
 
-        <com.google.android.gms.ads.AdView
-            android:id="@+id/AdView"
+        <Button
+            android:id="@+id/create_button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-            app:adSize="BANNER"
-            app:adUnitId="ca-app-pub-3940256099942544/6300978111">
-
-        </com.google.android.gms.ads.AdView>
+            android:text="NEW OFFER" />
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/offer_view"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
-
-
     </LinearLayout>
 </android.support.constraint.ConstraintLayout>
